@@ -2,6 +2,7 @@ package com.work.service;
 
 import java.util.ArrayList;
 
+import com.work.exception.CommonException;
 import com.work.exception.DuplicateException;
 import com.work.exception.RecordNotFoundException;
 import com.work.model.dto.ReserveMember;
@@ -58,11 +59,33 @@ public class ReserveNotifyService {
 	}
 
 	/**
+	 * 
+	 * @return
+	 * @throws DuplicateException
+	 */
+	public int initReserve() throws DuplicateException {
+		ReserveMember dto1 = new ReserveMember("홍길동", "010-1234-1000", "대전광역시", "800101-1100000", "화이자", "210601");
+		ReserveMember dto2 = new ReserveMember("김일영", "010-1234-2000", "서울특별시", "800201-2200000", "모더나", "210602");
+		ReserveMember dto3 = new ReserveMember("김이영", "010-1234-3000", "부산광역시", "800301-1300000", "아스트로제네카", "210603");
+		ReserveMember dto4 = new ReserveMember("김삼영", "010-1234-4000", "인천광역시", "800401-1400000", "화이자", "210604");
+		ReserveMember dto5 = new ReserveMember("김사영", "010-1234-5000", "울산광역시", "800501-1500000", "모더나", "210605");
+		
+				
+		addMember(dto1);	
+		addMember(dto2);	
+		addMember(dto3);	
+		addMember(dto4);	
+		addMember(dto5);	
+		
+		return list.size();
+	}
+	
+	/**
 	 * 예약자 추가 등록
 	 * @param name 이름
 	 * @param phoneNumber 전화번호
 	 * @param address 주소
-	 * @param idNumber 주민번호
+	 * @param idNumber 주민번호 
 	 * @param vaccine 백신종류
 	 * @param firstVaccination 1차 접종일
 	 * @throws DuplicateException 
@@ -81,7 +104,11 @@ public class ReserveNotifyService {
 	 * @return 전체 목록
 	 */
 	public ArrayList<ReserveMember> getList() {
-		return list;
+		for (int index = 0; index < list.size() ; index++) {
+			System.out.println(list.get(index));
+		}
+		return null;
+		 
 	}
 
 	/**
@@ -198,16 +225,42 @@ public class ReserveNotifyService {
 	}
 	
 	
+	/**
+	 * 로그인
+	 * @param name
+	 * @param idNumber
+	 * @return
+	 * @throws RecordNotFoundException
+	 * @throws CommonException
+	 */
+	public boolean login(String name, String idNumber) throws RecordNotFoundException, CommonException {
+		try {
+			ReserveMember dto = getListMember(name);
+			if (dto.getIdNumber().equals(idNumber)) {
+				return true;
+			} 
+			throw new CommonException("회원의 정보가 올바르지 않습니다.");
+		} catch (RecordNotFoundException e) {
+			throw e;
+		}
+	}
 	
 	/**
-	 * 2차 접종일 계산
+	 * 관리자 로그인
+	 * @param id
+	 * @param pw
+	 * @return
+	 * @throws RecordNotFoundException
+	 * @throws CommonException
 	 */
-
+	public boolean adminLogin(String id, String pw) throws RecordNotFoundException, CommonException {
+		String adminId = "admin00";
+		String adminPw = "password00";
+		if (id.equals(adminId) &&  pw.equals(adminPw)) {
+			return true;
+		} 
+		throw new CommonException("회원의 정보가 올바르지 않습니다.");
+	}
 	
-
-	/**
-	 * 등록된 정보 수정 
-	 */
-
-
 }
+

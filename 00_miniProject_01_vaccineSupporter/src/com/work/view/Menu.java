@@ -43,7 +43,7 @@ public class Menu {
 		System.out.println("9. 관리자 메뉴");
 		System.out.println("0. 프로그램 종료");
 		printLine();
-
+		System.out.println();
 		System.out.print("메뉴번호 입력 : ");
 		int menuNo = inputNumber();
 
@@ -146,7 +146,7 @@ public class Menu {
 
 	private void getYesterdayVacciCountMenu() {
 		printTitle("어제 접종자 조회 메뉴");
-
+		System.out.println("지역 목록 : [전국, 서울특별시, 부산광역시, 대구광역시, 인천광역시, 대전광역시, 광주광역시, 울산광역시, 세종특별자치시, 강원도]");
 		System.out.print("지역 : ");
 		String region = inputString();
 
@@ -165,7 +165,7 @@ public class Menu {
 
 	private void getTotalVacciCountMenu() {
 		printTitle("누적 접종자 조회 메뉴");
-
+		System.out.println("지역 목록 : [전국, 서울특별시, 부산광역시, 대구광역시, 인천광역시, 대전광역시, 광주광역시, 울산광역시, 세종특별자치시, 강원도]");
 		System.out.print("지역 : ");
 		String region = inputString();
 
@@ -185,6 +185,7 @@ public class Menu {
 
 		System.out.print("나이 : ");
 		int age = inputNumber();
+		System.out.println("직군 목록 : [회사원, 학생, 의료, 경찰, 소방, 군인]");
 		System.out.print("직군 : ");
 		String job = inputString();
 
@@ -345,7 +346,7 @@ public class Menu {
 			System.out.println("화이자 백신은 1차 접종 3주 후 2차 접종입니다.");
 			result = utility.addDate(vaccineName, firstDay);
 			System.out.println("예정일 : " + result);
-			System.out.println("2차 접종일 3일 전에 알림을 받으시겠습니까? ");
+			System.out.print("2차 접종일 3일 전에 알림을 받으시겠습니까? [O, X] ");
 			String ox1 = inputString();
 			if (ox1.equals("O")) {
 				setMemberMenu();
@@ -355,7 +356,7 @@ public class Menu {
 			System.out.println("모더나 백신은 1차 접종 4주 후 2차 접종입니다.");
 			result = utility.addDate(vaccineName, firstDay);
 			System.out.println("예정일 : " + result);
-			System.out.println("2차 접종일 3일 전에 알림을 받으시겠습니까? ");
+			System.out.print("2차 접종일 3일 전에 알림을 받으시겠습니까? [O, X] ");
 			String ox2 = inputString();
 			if (ox2.equals("O")) {
 				setMemberMenu();
@@ -365,7 +366,7 @@ public class Menu {
 			System.out.println("아스트라제네카 백신은 1차 접종 12주 후 2차 접종입니다.");
 			result = utility.addDate(vaccineName, firstDay);
 			System.out.println("예정일 : " + result);
-			System.out.println("2차 접종일 3일 전에 알림을 받으시겠습니까? ");
+			System.out.print("2차 접종일 3일 전에 알림을 받으시겠습니까? [O, X] ");
 			String ox3 = inputString();
 			if (ox3.equals("O")) {
 				setMemberMenu();
@@ -478,8 +479,9 @@ public class Menu {
 			 System.out.println(notifyService.getListMember(name, idNumber));
 		} catch (RecordNotFoundException e) {
 			print("잘못된 형식을 입력하셨습니다.");
-			mainMenu();
+			
 		}
+		secondVaccineImfoMenu();
 	}
 
 	private void setInfo() {
@@ -510,7 +512,7 @@ public class Menu {
 		} catch (RecordNotFoundException e) {
 			System.out.println("[오류] 맞지 않는 형식입니다.");
 		}
-		
+		secondVaccineImfoMenu();
 	}
 	
 	/**
@@ -641,11 +643,12 @@ public class Menu {
 		
 		try {
 			notifyService.removeMemberList(name);
+			System.out.println(notifyService.getList());
 		} catch (RecordNotFoundException e) {
-			e.printStackTrace();
+			System.out.println("[오류] 없는 이름입니다.");
 		}
 		
-		System.out.println(notifyService.getList());
+		
 	}
 	
 	

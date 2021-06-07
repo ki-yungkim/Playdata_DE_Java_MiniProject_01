@@ -2,6 +2,8 @@ package com.work.model.dto;
 
 public class VaccineCount {
 
+	private int idKey;
+	
 	private String day;
 	
 	private String region;
@@ -22,6 +24,7 @@ public class VaccineCount {
 
 
 	/**
+	 * @param idKey
 	 * @param day
 	 * @param region
 	 * @param yesterdayFirst
@@ -29,14 +32,35 @@ public class VaccineCount {
 	 * @param totalFirst
 	 * @param totalSecond
 	 */
-	public VaccineCount(String day, String region, int yesterdayFirst, int yesterdaySecond, int totalFirst,
+	public VaccineCount(int idKey, String day, String region, int yesterdayFirst, int yesterdaySecond, int totalFirst,
 			int totalSecond) {
+		this.idKey = idKey;
 		this.day = day;
 		this.region = region;
 		this.yesterdayFirst = yesterdayFirst;
 		this.yesterdaySecond = yesterdaySecond;
 		this.totalFirst = totalFirst;
 		this.totalSecond = totalSecond;
+	}
+
+
+
+	
+	
+	/**
+	 * @return the idKey
+	 */
+	public int getIdKey() {
+		return idKey;
+	}
+
+
+
+	/**
+	 * @param idKey the idKey to set
+	 */
+	public void setIdKey(int idKey) {
+		this.idKey = idKey;
 	}
 
 

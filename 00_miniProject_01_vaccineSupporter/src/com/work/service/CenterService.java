@@ -10,11 +10,11 @@ public class CenterService {
 
 	/** 센터 정보들을 저장관리하기 위한 자료 저장구조 : Generic*/
 	private ArrayList<CenterList> list = new ArrayList<CenterList>();
-
+	private ArrayList sameRegionList = new ArrayList();
 	/** 기본생성자 : 초기 센터 목록 등록 수행 */
 	public CenterService() {}
 
-	
+
 	/**
 	 * 센터 리스트에 센터 이름 존재 유무 조회
 	 * @param centerName 센터 이름
@@ -28,7 +28,7 @@ public class CenterService {
 		}
 		return -1;
 	}
-	
+
 	/**
 	 * 센터 리스트에 시설 이름 존재 유무 조회
 	 * @param facilityName 시설 이름
@@ -42,7 +42,7 @@ public class CenterService {
 		}
 		return -1;
 	}
-	
+
 	/**
 	 * 센터 리스트에 우편번호 존재 유무 조회
 	 * @param postcode 우편번호
@@ -56,7 +56,7 @@ public class CenterService {
 		}
 		return -1;
 	}
-	
+
 	/**
 	 * 센터 리스트에 주소(도, 시, 구 단위까지) 존재 유무 조회
 	 * @param address 주소
@@ -70,7 +70,19 @@ public class CenterService {
 		}
 		return -1;
 	}
-	
+
+	public ArrayList existAddressList(String address) {
+
+		sameRegionList.clear();
+		for (int index = 0; index < list.size(); index++) {
+			if (list.get(index).getAddress().equals(address)) {
+				sameRegionList.add(index);
+			}
+		}
+		return sameRegionList;
+	}
+
+
 	/**
 	 * 센터 리스트에 전화번호 존재 유무 조회
 	 * @param phoneNumber 센터 전화번호 
@@ -84,7 +96,7 @@ public class CenterService {
 		}
 		return -1;
 	}
-	
+
 	/**
 	 * 센터등록	
 	 * @param dto
@@ -109,19 +121,21 @@ public class CenterService {
 		CenterList dto2 = new CenterList("경기도 시흥시 예방접종센터", "정왕평생학습관", "15055", "경기도 시흥시", "경기도 시흥시 정왕대로 233번길 21", "031-310-5851");
 		CenterList dto3 = new CenterList("경상남도 산청군 예방접종센터", "산청군 실내체육관", "52215", "경상남도 산청군", "경상남도 산청군 금서면 친환경로2631번길 39", "055-970-7548");
 		CenterList dto4 = new CenterList("광주광역시 광산구 예방접종센터", "광주보훈병원 재활체육관", "62284", "광주광역시 광산구", "광주광역시 광산구 첨단월봉로 99, 광주보훈병원", "062-960-6862");
-		CenterList dto5 = new CenterList(" 중앙 예방접종센터", "국립중앙의료원 D동", "4562", "서울특별시 중구", "서울특별시 중구 을지로 39길 29", "02-2260-7114");
-		
+		CenterList dto5 = new CenterList("중앙 예방접종센터", "국립중앙의료원 D동", "4562", "서울특별시 중구", "서울특별시 중구 을지로 39길 29", "02-2260-7114");
+		CenterList dto6 = new CenterList("서울특별시 중구 예방접종센터 ", "충무스포츠센터", "4569", "서울특별시 중구", "서울특별시 중구 퇴계로 387", "02-3396-4503");
+
 		addCenter(dto1);
 		addCenter(dto2);
 		addCenter(dto3);
 		addCenter(dto4);
 		addCenter(dto5);
-		
-		
+		addCenter(dto6);
+
+
 		return list.size();
 	}
-	
-	
+
+
 	/**
 	 * 센터 추가등록
 	 * @param centerName
@@ -138,12 +152,12 @@ public class CenterService {
 		addCenter(dto);
 	} 	
 
-	
-	
-	
 
 
-	
+
+
+
+
 	/**
 	 * 전체조회 - 관리자 전용 
 	 * @return 전체 목록
@@ -151,7 +165,7 @@ public class CenterService {
 	public ArrayList<CenterList> getList() {
 		return list;
 	}
-	
+
 	/**
 	 * 현재 등록 센터 수 조회
 	 * @return 등록센터 수
@@ -160,7 +174,7 @@ public class CenterService {
 		return list.size();
 	}
 
-	
+
 	/**
 	 * 센터명으로 조회
 	 * @param centerName
@@ -174,7 +188,7 @@ public class CenterService {
 		}
 		throw new RecordNotFoundException(centerName);
 	}
-	
+
 	/**
 	 * 시설명으로 조회
 	 * @param facilityName
@@ -188,22 +202,26 @@ public class CenterService {
 		}
 		throw new RecordNotFoundException(facilityName);
 	}
-	
-	
+
+
 	/**
 	 * 센터 주소(시 군 구)로 조회
 	 * @param address
-	 * @return 존재하면 센터 정보, 없으면 데이터검색 예외
 	 * @throws RecordNotFoundException
 	 */
-	public CenterList getListAddress(String address) throws RecordNotFoundException{
-		int index = existAddress(address);
-		if (index >= 0) {
-			return (CenterList)list.get(index);
+	public void getListAddress(String address)  throws RecordNotFoundException{
+		existAddressList(address);
+		if(sameRegionList.size() > 0) {
+			for (int index = 0; index < sameRegionList.size(); index++) {
+				int indexRegion = (int)existAddressList(address).get(index);
+				System.out.println(list.get(indexRegion));
+			}
+		} else {
+			throw new RecordNotFoundException(address);
 		}
-		throw new RecordNotFoundException(address);
-	}
 		
+	}
+
 	/**
 	 * 전화번호로 센터 조회 
 	 * @param phoneNumber 
@@ -227,8 +245,8 @@ public class CenterService {
 		list.clear();
 		return list.size();
 	}
-	
-	
+
+
 	/**
 	 * 센터 리스트 중 입력한 하나 삭제 
 	 * @param centerName 센터 이름
@@ -240,10 +258,10 @@ public class CenterService {
 		if (index >= 0) {
 			return list.remove(index);
 		}
-		
+
 		throw new RecordNotFoundException(centerName);
 	}
-	
+
 	/**
 	 * 센터 이름 기준 센터 정보 변경 
 	 * @param dto 변경할 정보 
@@ -259,8 +277,8 @@ public class CenterService {
 		throw new RecordNotFoundException(dto.getCenterName());
 	}
 
-	
-	
+
+
 
 
 }

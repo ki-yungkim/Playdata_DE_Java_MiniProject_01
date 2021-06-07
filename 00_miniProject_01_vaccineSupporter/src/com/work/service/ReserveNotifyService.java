@@ -64,11 +64,11 @@ public class ReserveNotifyService {
 	 * @throws DuplicateException
 	 */
 	public int initReserve() throws DuplicateException {
-		ReserveMember dto1 = new ReserveMember("홍길동", "010-1234-1000", "대전광역시", "800101-1100000", "화이자", "210601");
-		ReserveMember dto2 = new ReserveMember("김일영", "010-1234-2000", "서울특별시", "800201-2200000", "모더나", "210602");
+		ReserveMember dto1 = new ReserveMember("홍길동", "010-1234-1000", "대전광역시", "900101-1100000", "화이자", "210601");
+		ReserveMember dto2 = new ReserveMember("김일영", "010-1234-2000", "서울특별시", "900201-2200000", "모더나", "210602");
 		ReserveMember dto3 = new ReserveMember("김이영", "010-1234-3000", "부산광역시", "800301-1300000", "아스트로제네카", "210603");
-		ReserveMember dto4 = new ReserveMember("김삼영", "010-1234-4000", "인천광역시", "800401-1400000", "화이자", "210604");
-		ReserveMember dto5 = new ReserveMember("김사영", "010-1234-5000", "울산광역시", "800501-1500000", "모더나", "210605");
+		ReserveMember dto4 = new ReserveMember("김삼영", "010-1234-4000", "인천광역시", "900401-1400000", "화이자", "210604");
+		ReserveMember dto5 = new ReserveMember("김사영", "010-1234-5000", "울산광역시", "700501-1500000", "모더나", "210605");
 		
 				
 		addMember(dto1);	

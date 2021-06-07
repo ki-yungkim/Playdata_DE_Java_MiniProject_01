@@ -1,5 +1,7 @@
 package com.work.view;
 
+import java.io.IOException;
+
 import com.work.exception.DuplicateException;
 
 /**
@@ -21,16 +23,19 @@ public class CUI {
 	public static void main(String[] args) throws DuplicateException {
 		/* 회원관리 메뉴 */
 		Menu view = new Menu();
-		
+
 		/* 초기화 회원 등록 */
 		//view.service.initMember();
-		
+
 		/* 초기화 메뉴 수행 */
 		view.initMenu();
-		
+
 		while(true) {
-			view.mainMenu();
+			try {
+				view.mainMenu();
+			} catch (IOException e) {
+				System.out.println("[오류] 입력형식 오류");;
+			}
 		}
 	}
-
 }

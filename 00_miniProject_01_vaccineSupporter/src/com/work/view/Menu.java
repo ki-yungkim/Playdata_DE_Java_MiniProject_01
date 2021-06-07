@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import com.sun.jndi.cosnaming.IiopUrl.Address;
 import com.work.exception.CommonException;
 import com.work.exception.DuplicateException;
 import com.work.exception.RecordNotFoundException;
@@ -32,9 +31,9 @@ public class Menu {
 	public VaccineCountService vacciService = new VaccineCountService();
 	public Utility utility = new Utility();
 
-	public void mainMenu() {
+	public void mainMenu() throws IOException, NumberFormatException {
 		printTitle("백신 도우미 메인메뉴");
-		System.out.println("1. 어제 접종자 조회");
+		System.out.println("1. 접종자 조회"); 
 		System.out.println("2. 누적 접종자 조회");
 		System.out.println("3. 우선 접종대상자 조회");
 		System.out.println("4. 예방접종센터 조회");
@@ -49,23 +48,18 @@ public class Menu {
 
 		switch(menuNo) {
 		case 1:
-			System.out.println("1. 어제 접종자 조회");
 			getYesterdayVacciCountMenu();
 			break;
 		case 2:
-			System.out.println("2. 누적 접종자 조회");
 			getTotalVacciCountMenu();
 			break;
 		case 3:
-			System.out.println("3. 우선 접종대상자 조회");
 			prefferdMemberMenu();
 			break;
 		case 4:
-			System.out.println("4. 예방접종센터 조회");
 			searchCenterMenu();
 			break;
 		case 5:
-			System.out.println("5. 백신별 2차 접종 대기기간 조회");
 			try {
 				waitVaccine();
 			} catch (Exception e) {
@@ -73,7 +67,6 @@ public class Menu {
 			}
 			break;
 		case 6:
-			System.out.println("6. 백신 알림기능 신청자 정보 관리");
 			try {
 				login();
 			} catch (RecordNotFoundException e) {
@@ -83,7 +76,6 @@ public class Menu {
 			}
 			break;
 		case 9:
-			System.out.println("9. 관리자 메뉴");
 			try {
 				adminLogin();
 			} catch (RecordNotFoundException e) {
@@ -144,43 +136,58 @@ public class Menu {
 	}
 
 
-	private void getYesterdayVacciCountMenu() {
-		printTitle("어제 접종자 조회 메뉴");
-		System.out.println("지역 목록 : [전국, 서울특별시, 부산광역시, 대구광역시, 인천광역시, 대전광역시, 광주광역시, 울산광역시, 세종특별자치시, 강원도]");
+	private void getYesterdayVacciCountMenu() throws IOException {
+		printTitle(" 접종자 조회 메뉴");
+
+		System.out.println("지역 목록 : ");
+		System.out.println("[전국, 서울특별시, 부산광역시, 대구광역시, 인천광역시, 대전광역시, 광주광역시, 울산광역시, 세종특별자치시, 강원도]");
+		System.out.println();
+		System.out.print("날짜 [yy-MM-dd] : ");
+		String day = inputString();
+
 		System.out.print("지역 : ");
 		String region = inputString();
 
 		try {
-			int resultFirst = vacciService.getRegionCountFirst(region);
-			int resultSecond = vacciService.getRegionCountSecond(region);
-			
-			print("어제 "+ region + " 지역 1차 접종자 수는 " + utility.commaThousand(resultFirst) + "명입니다." );
-			print("어제 "+ region + " 지역 2차 접종자 수는 " + utility.commaThousand(resultSecond) + "명입니다." );
+			int resultFirst = vacciService.getRegionCountFirst(day, region);
+			int resultSecond = vacciService.getRegionCountSecond(day, region);
+			System.out.println();
+			print(day + " 날짜의 " +  region + " 지역 1차 접종자 수는 " + utility.commaThousand(resultFirst) + "명입니다." );
+			print(day + " 날짜의 " + region + " 지역 2차 접종자 수는 " + utility.commaThousand(resultSecond) + "명입니다." );
+			pause();
 		} catch (RecordNotFoundException e) {
 			print("잘못된 형식을 입력하셨습니다.");
-			mainMenu();
+			pause();
 		}
 	}
 
 
-	private void getTotalVacciCountMenu() {
+	private void getTotalVacciCountMenu() throws IOException {
 		printTitle("누적 접종자 조회 메뉴");
-		System.out.println("지역 목록 : [전국, 서울특별시, 부산광역시, 대구광역시, 인천광역시, 대전광역시, 광주광역시, 울산광역시, 세종특별자치시, 강원도]");
+		System.out.println("지역 목록 : ");
+		System.out.println("[전국, 서울특별시, 부산광역시, 대구광역시, 인천광역시, 대전광역시, 광주광역시, 울산광역시, 세종특별자치시, 강원도]");
+		System.out.println();
+		System.out.print("날짜 [yy-MM-dd] : ");
+		String day = inputString();
+
 		System.out.print("지역 : ");
 		String region = inputString();
 
 		try {
-			int resultFirst = vacciService.getRegionCountTotalFirst(region);
-			int resultSecond = vacciService.getRegionCountTotalSecond(region);
-			print(region + " 지역 누적 1차 접종자 수는 " + utility.commaThousand(resultFirst) + "명입니다." );
-			print(region + " 지역 누적 2차 접종자 수는 " + utility.commaThousand(resultSecond) + "명입니다." );
+			int resultFirst = vacciService.getRegionCountTotalFirst(day, region);
+			int resultSecond = vacciService.getRegionCountTotalSecond(day, region);
+			System.out.println();
+			print(day + " 날짜의 " + region + " 지역 누적 1차 접종자 수는 " + utility.commaThousand(resultFirst) + "명입니다." );
+			print(day + " 날짜의 " + region + " 지역 누적 2차 접종자 수는 " + utility.commaThousand(resultSecond) + "명입니다." );
+			pause();
 		} catch (RecordNotFoundException e) {
 			print("잘못된 형식을 입력하셨습니다.");
 			mainMenu();
+			pause();
 		}
 	}
 
-	private void prefferdMemberMenu() {
+	private void prefferdMemberMenu() throws IOException {
 		printTitle("우선접종대상자 조회 메뉴");
 
 		System.out.print("나이 : ");
@@ -191,7 +198,7 @@ public class Menu {
 
 		if (age >= 50) {
 			System.out.println("우선접종대상자입니다.");
-			System.out.print("근처 센터를 조회하시겠습니까? [O, X]");
+			System.out.print("근처 센터를 조회하시겠습니까? [O, X] ");
 			String ox = inputString();
 			if (ox.equals("O")) {
 				searchCenterMenu();
@@ -233,12 +240,12 @@ public class Menu {
 				break;
 			default :
 				System.out.println("우선접종대상자가 아닙니다.");
-				mainMenu();
+				pause();
 			}
 		}
 	}
 
-	private void searchCenterMenu() {
+	private void searchCenterMenu() throws IOException {
 		printTitle("예방접종센터 조회 메뉴");
 
 		System.out.println("1. 센터명으로 찾기");
@@ -260,7 +267,11 @@ public class Menu {
 			searchListFacilityNameMenu();
 			break;
 		case 3:
-			searchListAddressMenu();
+			try {
+				searchListAddressMenu();
+			} catch (RecordNotFoundException e) {
+				e.printStackTrace();
+			}
 			break;
 		case 4:
 			searchListPhoneNumberMenu();
@@ -274,60 +285,82 @@ public class Menu {
 		}
 	}
 
-	private void searchListCenterNameMenu() {
+	private void searchListCenterNameMenu() throws IOException {
 		printTitle("센터명으로 찾기 메뉴");
 		System.out.print("센터명 : ");
 		String centerName = inputString();
 
 		try {
 			CenterList result = service.getListCenterName(centerName);
+			System.out.println("센터명, 시설명, 우편번호, 주소, 상세주소 사무실전화번호");
 			System.out.println(result);
+			pause();
+			searchCenterMenu();
 		} catch (RecordNotFoundException e) {
 			print("잘못된 형식을 입력하셨습니다.");
-			mainMenu();
+			pause();
+			searchCenterMenu();
 		}
 
 	}
 
-	private void searchListFacilityNameMenu() {
+	private void searchListFacilityNameMenu() throws IOException {
 		printTitle("시설명으로 찾기 메뉴");
 		System.out.print("시설명 : ");
 		String facilityName = inputString();
 
 		try {
 			CenterList result = service.getListFacility(facilityName);
+			System.out.println("센터명, 시설명, 우편번호, 주소, 상세주소 사무실전화번호");
 			System.out.println(result);
+			pause();
+			searchCenterMenu();
 		} catch (RecordNotFoundException e) {
 			print("잘못된 형식을 입력하셨습니다.");
-			mainMenu();
+			pause();
+			searchCenterMenu();
 		}
 	}
 
-	private void searchListAddressMenu() {
+	/**
+	 * 
+	 * @throws RecordNotFoundException
+	 * @throws IOException 
+	 * @throws NumberFormatException 
+	 */
+	private void searchListAddressMenu() throws RecordNotFoundException, NumberFormatException, IOException  {
 		printTitle("주소로 찾기 메뉴");
 		System.out.print("주소 [시, 군, 구 단위]: ");
 		String adress = inputString();
 
 		try {
-			CenterList result = service.getListAddress(adress);
-			System.out.println(result);
+			System.out.println("센터명, 시설명, 우편번호, 주소, 상세주소 사무실전화번호");
+			service.getListAddress(adress);
+			pause();
+			searchCenterMenu();
 		} catch (RecordNotFoundException e) {
 			print("잘못된 형식을 입력하셨습니다.");
-			mainMenu();
+			pause();
+			searchCenterMenu();
 		}
+		
 	}
-
-	private void searchListPhoneNumberMenu() {
+	
+	private void searchListPhoneNumberMenu() throws IOException {
 		printTitle("전화번호로 찾기 메뉴");
 		System.out.print("전화번호 [012-1234-1234] : ");
 		String phoneNumber = inputString();
 
 		try {
 			CenterList result = service.getListPhone(phoneNumber);
+			System.out.println("센터명, 시설명, 우편번호, 주소, 상세주소 사무실전화번호");
 			System.out.println(result);
+			pause();
+			searchCenterMenu();
 		} catch (RecordNotFoundException e) {
 			print("잘못된 형식을 입력하셨습니다.");
-			mainMenu();
+			pause();
+			searchCenterMenu();
 		}
 	}
 
@@ -339,14 +372,14 @@ public class Menu {
 
 		System.out.print("접종일 [yy-MM-dd] : ");
 		String firstDay = inputString();
-		
+
 		String result = null;
 		switch(vaccineName) {
 		case "화이자" :
 			System.out.println("화이자 백신은 1차 접종 3주 후 2차 접종입니다.");
 			result = utility.addDate(vaccineName, firstDay);
 			System.out.println("예정일 : " + result);
-			System.out.print("2차 접종일 3일 전에 알림을 받으시겠습니까? [O, X] ");
+			System.out.print("2차 접종일 알림을 받으시겠습니까? [O, X] ");
 			String ox1 = inputString();
 			if (ox1.equals("O")) {
 				setMemberMenu();
@@ -356,7 +389,7 @@ public class Menu {
 			System.out.println("모더나 백신은 1차 접종 4주 후 2차 접종입니다.");
 			result = utility.addDate(vaccineName, firstDay);
 			System.out.println("예정일 : " + result);
-			System.out.print("2차 접종일 3일 전에 알림을 받으시겠습니까? [O, X] ");
+			System.out.print("2차 접종일 알림을 받으시겠습니까? [O, X] ");
 			String ox2 = inputString();
 			if (ox2.equals("O")) {
 				setMemberMenu();
@@ -366,7 +399,7 @@ public class Menu {
 			System.out.println("아스트라제네카 백신은 1차 접종 12주 후 2차 접종입니다.");
 			result = utility.addDate(vaccineName, firstDay);
 			System.out.println("예정일 : " + result);
-			System.out.print("2차 접종일 3일 전에 알림을 받으시겠습니까? [O, X] ");
+			System.out.print("2차 접종일 알림을 받으시겠습니까? [O, X] ");
 			String ox3 = inputString();
 			if (ox3.equals("O")) {
 				setMemberMenu();
@@ -382,59 +415,61 @@ public class Menu {
 
 	private void setMemberMenu() {
 		printTitle("백신 알림기능 신청자 등록 메뉴");
-		
+
 		System.out.print("이름 : ");
 		String name = inputString();
-		
+
 		System.out.print("전화번호 : ");
 		String phoneNumber = inputString();
-		
+
 		System.out.print("주소 : ");
 		String address = inputString();
-		
+
 		System.out.print("주민번호 : ");
 		String idNumber = inputString();
-		
+
 		System.out.print("백신종류 : ");
 		String vaccineName = inputString();
-		
+
 		System.out.print("1차 접종일 : ");
 		String firstDay = inputString();
-		
+
 		ReserveMember dto = new ReserveMember(name, phoneNumber, address, idNumber,vaccineName, firstDay);
-		
+
 		try {
 			notifyService.addMember(name, phoneNumber, address, idNumber, vaccineName, firstDay);
-			print("[등록 성공] " + name + "님의 2차 접종일 3일 전에 문자 연락이 갈 예정입니다.");
+			print("[등록 성공] " + name + "님의 2차 접종일 알림 문자 연락이 갈 예정입니다.");
+			pause();
 		} catch (DuplicateException e) {
 			e.printStackTrace();
 		}
-		
-	
+
+
 	}
-	
-	
-	private void login() throws RecordNotFoundException, CommonException {
+
+
+	private void login() throws RecordNotFoundException, CommonException, IOException {
 		printTitle("로그인 메뉴");
-		
+
 		System.out.print("이름 : ");
 		String name = inputString();
-		
+
 		System.out.print("주민번호 : ");
 		String idNumber = inputString();
-		
+
 		if(notifyService.login(name, idNumber)) {
 			secondVaccineImfoMenu();
 		} else {
 			mainMenu();
 		}
-		
+
 	}
-	
+
 	/**
 	 * 백신 알림기능 신청자 정보 수정 서비스 메인메뉴
+	 * @throws IOException 
 	 */
-	private void secondVaccineImfoMenu() {
+	private void secondVaccineImfoMenu() throws IOException {
 		printTitle("백신 알림기능 신청자 정보 관리 메뉴");
 		System.out.println("1. 내정보조회");
 		System.out.println("2. 내정보변경");
@@ -464,81 +499,86 @@ public class Menu {
 			break;
 		}
 	}
-	
-	
-	private void getInfo() {
+
+
+	private void getInfo() throws IOException {
 		printTitle("내 정보 조회 메뉴");
-		
+
 		System.out.print("이름 : ");
 		String name = inputString();
-		
+
 		System.out.print("주민번호 : ");
 		String idNumber = inputString();
-	
+
 		try {
-			 System.out.println(notifyService.getListMember(name, idNumber));
+			System.out.println(notifyService.getListMember(name, idNumber));
+			pause();
 		} catch (RecordNotFoundException e) {
 			print("잘못된 형식을 입력하셨습니다.");
-			
+			pause();
+
 		}
 		secondVaccineImfoMenu();
 	}
 
-	private void setInfo() {
+	private void setInfo() throws IOException {
 		printTitle("내 정보 변경 메뉴");
-		
+
 		System.out.print("이름 : ");
 		String name = inputString();
-		
+
 		System.out.print("전화번호 : ");
 		String phoneNumber = inputString();
-		
+
 		System.out.print("주소 : ");
 		String address = inputString();
-		
+
 		System.out.print("주민번호 : ");
 		String idNumber = inputString();
-		
+
 		System.out.print("백신종류 : ");
 		String vaccineName = inputString();
-		
+
 		System.out.print("1차 접종일 : ");
 		String firstVaccine = inputString();
-		
+
 		ReserveMember dto = new ReserveMember(name, phoneNumber, address, idNumber,vaccineName, firstVaccine);
-		
+
 		try {
 			notifyService.setMemberImfo(dto);
+			pause();
 		} catch (RecordNotFoundException e) {
 			System.out.println("[오류] 맞지 않는 형식입니다.");
+			pause();
 		}
 		secondVaccineImfoMenu();
 	}
-	
+
 	/**
 	 * 관리자 로그인
 	 * @throws RecordNotFoundException
 	 * @throws CommonException
+	 * @throws IOException 
 	 */
-	private void adminLogin() throws RecordNotFoundException, CommonException {
+	private void adminLogin() throws RecordNotFoundException, CommonException, IOException {
 		printTitle("관리자 로그인 메뉴");
 		
 		System.out.print("아이디 : ");
 		String id = inputString();
-		
+
 		System.out.print("비밀번호 : ");
 		String pw = inputString();
-		
+
 		if(notifyService.adminLogin(id, pw)) {
 			adminMainMenu();
 		} else {
 			mainMenu();
 		}
-		
+
 	}
-	
-	
-	private void adminMainMenu() {
+
+
+	private void adminMainMenu() throws IOException {
 		printTitle("관리자 서비스 메인메뉴");
 
 		System.out.println("1. 접종자 수 등록");
@@ -572,18 +612,24 @@ public class Menu {
 			break;
 		}	}
 
-	private void addVacciCountMenu() {
+	private void addVacciCountMenu() throws IOException {
 		printTitle("접종자 수 등록");
 
-		vacciService.removeCountAll();
+		//고유번호 가져오기 
+		
+		System.out.println("다음 고유번호 : " + (vacciService.getCount() + 1));
+		
+		
+		System.out.print("고유번호 : ");
+		int idKey = inputNumber();
 
 		System.out.print("날짜 : ");
 		String day = inputString();
 		System.out.print("지역 : ");
 		String region = inputString();
-		System.out.print("어제 1차 접종자 수 : ");
+		System.out.print("1차 접종자 수 : ");
 		int yesterdayFirst = inputNumber();
-		System.out.print("어제 2차 접종자 수 : ");
+		System.out.print("2차 접종자 수 : ");
 		int yesterdaySecond = inputNumber();
 		System.out.print("누적 1차 접종자 수 : ");
 		int totalFirst = inputNumber();
@@ -591,18 +637,21 @@ public class Menu {
 		int totalSecond = inputNumber();
 
 
-		VaccineCount dto = new VaccineCount(day, region, yesterdayFirst, yesterdaySecond, totalFirst, totalSecond );
+		VaccineCount dto = new VaccineCount(idKey, day, region, yesterdayFirst, yesterdaySecond, totalFirst, totalSecond );
 		try {
-			vacciService.addVacciCount(day, region, yesterdayFirst, yesterdaySecond, totalFirst, totalSecond);
+			vacciService.addVacciCount(idKey, day, region, yesterdayFirst, yesterdaySecond, totalFirst, totalSecond);
 			print("[등록 성공] " + "일자 : " + day + ", 지역 : " + region);
+			pause();
+			adminMainMenu();
 		} catch (DuplicateException e) {
 			print("[등록 실패]" + e.getMessage());
-			mainMenu();
+			pause();
+			adminMainMenu();
 		}
 
 	}
 
-	private void setCenterInfoMenu() {
+	private void setCenterInfoMenu() throws IOException {
 		printTitle("센터 정보 변경 메뉴");
 		System.out.print("센터명 : ");
 		String centerName = inputString();
@@ -627,37 +676,67 @@ public class Menu {
 		try {
 			service.setCenterImfo(dto);
 			print("[센터 정보 변경 성공]");
+			pause();
+			adminMainMenu();
 		} catch (RecordNotFoundException e) {
-			// TODO Auto-generated catch block
 			print("[변경 실패]" + e.getMessage());
-			mainMenu();
+			pause();
+			adminMainMenu();
 		}
-
+		
 	}
 
 	private void removeInfo() {
 		printTitle("백신알림기능 신청자 정보 삭제");
-		
+
 		System.out.print("이름 : ");
 		String name = inputString();
-		
+
 		try {
 			notifyService.removeMemberList(name);
 			System.out.println(notifyService.getList());
+			pause();
+			try {
+				adminMainMenu();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		} catch (RecordNotFoundException e) {
 			System.out.println("[오류] 없는 이름입니다.");
+			pause();
+			try {
+				adminMainMenu();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
-		
-		
+	}
+
+	
+	private void pause()  {
+		System.out.println();
+		System.out.println();
+		System.out.println("계속하시려면 1번을, 종료하시려면 0번을 입력해주세요");
+		int menuNo = inputNumber();
+		switch(menuNo) {
+		case 1:
+			break;
+		case 0:
+			exitMenu();
+			break;
+		default:
+			System.out.println("메뉴번호 오류");
+			break;
+		}
 	}
 	
-	
+
 
 	/**
 	 * 구분선 출력
 	 */
 	public void printLine() {
-		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+		System.out.println("************************");
 	}
 
 	/**
@@ -700,5 +779,5 @@ public class Menu {
 		}
 		return Integer.parseInt(data);
 	}
-
+	
 }

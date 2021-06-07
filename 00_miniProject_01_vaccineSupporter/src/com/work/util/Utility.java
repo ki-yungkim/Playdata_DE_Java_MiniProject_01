@@ -7,6 +7,13 @@ import java.util.Date;
 
 public class Utility {
 	
+	/**
+	 * 백신 종류에 따라 2차 접종 예정일 계산
+	 * @param vaccineName 백신 이름
+	 * @param fisrtDate 1차 접종일
+	 * @return 2차 접종일 
+	 * @throws Exception
+	 */
 	public static String addDate(String vaccineName, String fisrtDate) throws Exception{
 		SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd");
 		
@@ -31,11 +38,14 @@ public class Utility {
 			break;
 		
 		}
-		
 		return format.format(cal.getTime()) ;
 	}
 	
-	
+	/**
+	 * 천 단위 콤마 추가 메서드
+	 * @param number 입력 숫자
+	 * @return 천단위 콤마
+	 */
 	public static String commaThousand(int number) {
 		return NumberFormat.getInstance().format(number);
 	}

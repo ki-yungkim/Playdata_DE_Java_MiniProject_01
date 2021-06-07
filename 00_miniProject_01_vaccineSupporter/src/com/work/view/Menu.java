@@ -17,7 +17,7 @@ import com.work.util.Utility;
 
 /**
  * <pre>
- * 회원관리시스템 메뉴 구성
+ * 백신 도우미 시스템 메뉴 구성
  * </pre>
  *  
  * @author 김기영
@@ -25,12 +25,18 @@ import com.work.util.Utility;
  * @since jdk1.8
  */
 public class Menu {
-	/** 회원관리 서비스 클래스 */
+	
+	/** 서비스 클래스와 유틸리티 */
 	public CenterService service = new CenterService();
 	public ReserveNotifyService notifyService = new ReserveNotifyService();
 	public VaccineCountService vacciService = new VaccineCountService();
 	public Utility utility = new Utility();
 
+	/**
+	 * 백신 도우미 메인메뉴
+	 * @throws IOException 
+	 * @throws NumberFormatException
+	 */
 	public void mainMenu() throws IOException, NumberFormatException {
 		printTitle("백신 도우미 메인메뉴");
 		System.out.println("1. 접종자 조회"); 
@@ -95,10 +101,9 @@ public class Menu {
 	}
 
 	/**
-	 * 프로그램 서비스전에 초기화 작업 위한 메뉴 
+	 * 프로그램 서비스 전 초기화 작업 메뉴 
 	 */
 	public void initMenu() {
-		// 초기화 센터 목록 등록 
 		int count = 0;
 		try {
 			count = service.initCenter();
@@ -109,22 +114,14 @@ public class Menu {
 			print("[실패] " + e.getMessage());		
 		}
 		print("[초기화 작업이 완료되었습니다.]");
-
-		// 프로그램 서비스전에 기존 회원정보 파일가져와서 회원관리저장구조 메모리에 저장하기
-		// loadMemberDataFile();
-
 	}
-
 
 	/** 프로그램 종료 메뉴 */
 	public void exitMenu() {
-		// 프로그램 종료전에 회원정보 파일 저장
-		// saveMemberDataFile();
 
-		printTitle("회원관리 프로그램 정상 종료");
+		printTitle("백신 도우미 프로그램 정상 종료");
 		System.exit(0);
 	}
-
 
 
 	/**
@@ -135,13 +132,17 @@ public class Menu {
 		System.out.println(message);
 	}
 
-
+	/**
+	 * 접종자 조회 메뉴
+	 * @throws IOException
+	 */
 	private void getYesterdayVacciCountMenu() throws IOException {
-		printTitle(" 접종자 조회 메뉴");
+		printTitle("접종자 조회 메뉴");
 
 		System.out.println("지역 목록 : ");
 		System.out.println("[전국, 서울특별시, 부산광역시, 대구광역시, 인천광역시, 대전광역시, 광주광역시, 울산광역시, 세종특별자치시, 강원도]");
 		System.out.println();
+		
 		System.out.print("날짜 [yy-MM-dd] : ");
 		String day = inputString();
 
@@ -161,7 +162,10 @@ public class Menu {
 		}
 	}
 
-
+	/**
+	 * 누적 접종자 조회 메뉴
+	 * @throws IOException
+	 */
 	private void getTotalVacciCountMenu() throws IOException {
 		printTitle("누적 접종자 조회 메뉴");
 		System.out.println("지역 목록 : ");
@@ -187,6 +191,10 @@ public class Menu {
 		}
 	}
 
+	/**
+	 * 우선접종 대상자 조회 메뉴
+	 * @throws IOException
+	 */
 	private void prefferdMemberMenu() throws IOException {
 		printTitle("우선접종대상자 조회 메뉴");
 
@@ -245,6 +253,10 @@ public class Menu {
 		}
 	}
 
+	/**
+	 * 예방접종센터 조회 메뉴
+	 * @throws IOException
+	 */
 	private void searchCenterMenu() throws IOException {
 		printTitle("예방접종센터 조회 메뉴");
 
@@ -285,6 +297,10 @@ public class Menu {
 		}
 	}
 
+	/**
+	 * 센터명으로 센터 정보 조회 메뉴
+	 * @throws IOException
+	 */
 	private void searchListCenterNameMenu() throws IOException {
 		printTitle("센터명으로 찾기 메뉴");
 		System.out.print("센터명 : ");
@@ -304,6 +320,10 @@ public class Menu {
 
 	}
 
+	/**
+	 * 시설명으로 센터 정보 조회 메뉴
+	 * @throws IOException
+	 */
 	private void searchListFacilityNameMenu() throws IOException {
 		printTitle("시설명으로 찾기 메뉴");
 		System.out.print("시설명 : ");
@@ -323,7 +343,7 @@ public class Menu {
 	}
 
 	/**
-	 * 
+	 * 주소로 센터 정보 조회 메뉴
 	 * @throws RecordNotFoundException
 	 * @throws IOException 
 	 * @throws NumberFormatException 
@@ -346,6 +366,10 @@ public class Menu {
 		
 	}
 	
+	/**
+	 * 전화번호로 센터 정보 조회 메뉴
+	 * @throws IOException
+	 */
 	private void searchListPhoneNumberMenu() throws IOException {
 		printTitle("전화번호로 찾기 메뉴");
 		System.out.print("전화번호 [012-1234-1234] : ");
@@ -364,6 +388,10 @@ public class Menu {
 		}
 	}
 
+	/**
+	 * 백신별 2차 접종 대기기간 조회 메뉴
+	 * @throws Exception
+	 */
 	private void waitVaccine() throws Exception {
 		printTitle("백신별 2차 접종 대기기간 조회");
 
@@ -413,6 +441,7 @@ public class Menu {
 	}
 
 
+	/** 백신 알림기능 신청자 등록 메뉴 */
 	private void setMemberMenu() {
 		printTitle("백신 알림기능 신청자 등록 메뉴");
 
@@ -444,10 +473,14 @@ public class Menu {
 			e.printStackTrace();
 		}
 
-
 	}
-
-
+	
+	/**
+	 * 2차 접종일 알림 등록자 로그인 메뉴
+	 * @throws RecordNotFoundException
+	 * @throws CommonException
+	 * @throws IOException
+	 */
 	private void login() throws RecordNotFoundException, CommonException, IOException {
 		printTitle("로그인 메뉴");
 
@@ -501,6 +534,10 @@ public class Menu {
 	}
 
 
+	/**
+	 * 2차 접종 알림 등록자 정보 조회 메뉴 
+	 * @throws IOException
+	 */
 	private void getInfo() throws IOException {
 		printTitle("내 정보 조회 메뉴");
 
@@ -521,6 +558,10 @@ public class Menu {
 		secondVaccineImfoMenu();
 	}
 
+	/**
+	 * 2차 접종 알림 등록자 정보 변경 메뉴 
+	 * @throws IOException
+	 */
 	private void setInfo() throws IOException {
 		printTitle("내 정보 변경 메뉴");
 
@@ -555,7 +596,7 @@ public class Menu {
 	}
 
 	/**
-	 * 관리자 로그인
+	 * 관리자 로그인 메뉴
 	 * @throws RecordNotFoundException
 	 * @throws CommonException
 	 * @throws IOException 
@@ -578,6 +619,10 @@ public class Menu {
 	}
 
 
+	/**
+	 * 관리자 서비스 메뉴
+	 * @throws IOException
+	 */
 	private void adminMainMenu() throws IOException {
 		printTitle("관리자 서비스 메인메뉴");
 
@@ -612,30 +657,36 @@ public class Menu {
 			break;
 		}	}
 
+	/**
+	 * 관리자
+	 * 접종자 수 등록 메뉴
+	 * @throws IOException
+	 */
 	private void addVacciCountMenu() throws IOException {
 		printTitle("접종자 수 등록");
 
-		//고유번호 가져오기 
-		
 		System.out.println("다음 고유번호 : " + (vacciService.getCount() + 1));
-		
 		
 		System.out.print("고유번호 : ");
 		int idKey = inputNumber();
 
 		System.out.print("날짜 : ");
 		String day = inputString();
+		
 		System.out.print("지역 : ");
 		String region = inputString();
+		
 		System.out.print("1차 접종자 수 : ");
 		int yesterdayFirst = inputNumber();
+		
 		System.out.print("2차 접종자 수 : ");
 		int yesterdaySecond = inputNumber();
+		
 		System.out.print("누적 1차 접종자 수 : ");
 		int totalFirst = inputNumber();
+		
 		System.out.print("누적 2차 접종자 수 : ");
 		int totalSecond = inputNumber();
-
 
 		VaccineCount dto = new VaccineCount(idKey, day, region, yesterdayFirst, yesterdaySecond, totalFirst, totalSecond );
 		try {
@@ -651,6 +702,11 @@ public class Menu {
 
 	}
 
+	/**
+	 * 관리자 
+	 * 센터 정보 변경 메뉴
+	 * @throws IOException
+	 */
 	private void setCenterInfoMenu() throws IOException {
 		printTitle("센터 정보 변경 메뉴");
 		System.out.print("센터명 : ");
@@ -686,6 +742,10 @@ public class Menu {
 		
 	}
 
+	/**
+	 * 관리자
+	 * 백신 알림기능 신청자 정보 삭제 메뉴
+	 */
 	private void removeInfo() {
 		printTitle("백신알림기능 신청자 정보 삭제");
 
@@ -712,7 +772,9 @@ public class Menu {
 		}
 	}
 
-	
+	/**
+	 * 바로 메인 메뉴로 넘어가지 않게 대기 시켜주는 메서드
+	 */
 	private void pause()  {
 		System.out.println();
 		System.out.println();
@@ -730,8 +792,6 @@ public class Menu {
 		}
 	}
 	
-
-
 	/**
 	 * 구분선 출력
 	 */
@@ -777,7 +837,12 @@ public class Menu {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return Integer.parseInt(data);
+		try{
+			return Integer.parseInt(data);
+		} catch (NumberFormatException e) {
+			
+		}
+		return -1;
 	}
 	
 }

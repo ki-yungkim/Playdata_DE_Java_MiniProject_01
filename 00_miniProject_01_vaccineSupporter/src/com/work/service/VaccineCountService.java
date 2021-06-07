@@ -6,25 +6,29 @@ import com.work.exception.DuplicateException;
 import com.work.exception.RecordNotFoundException;
 import com.work.model.dto.VaccineCount;
 
-
+/**
+ * <pre>
+ * VaccineCount 구현 서비스 클래스 
+ * </pre>
+ * 
+ * @author 김기영
+ * @version ver 1.0
+ * @since jdk1.8
+ */
 public class VaccineCountService {
 
-	/**
-	 * 
-	 */
 	private ArrayList<VaccineCount> list = new ArrayList<VaccineCount>();
 	private ArrayList existDayList = new ArrayList();
 	private ArrayList existRegionList = new ArrayList();
 
-	/**
-	 * 
-	 */
+	/** 기본생성자 */
 	public VaccineCountService() {}
 
 	/**
-	 * 
-	 * @param idKey
-	 * @return
+	 * 중복체크
+	 * 고유 번호 존재 유무 조회
+	 * @param idKey 고유 번호
+	 * @return 존재하면 index 번호, 없으면 -1
 	 */
 	public int existidKey(int idKey) {
 		for (int index = 0; index < list.size(); index++) {
@@ -36,9 +40,10 @@ public class VaccineCountService {
 	}
 
 	/**
-	 * 
-	 * @param day
-	 * @return
+	 * 중복체크
+	 * 날짜 존재 유무 조회 
+	 * @param day 날짜 
+	 * @return 있으면 index 번호, 없으면 -1
 	 */
 	public int existDay(String day) {
 		for (int index = 0; index < list.size(); index++) {
@@ -50,9 +55,9 @@ public class VaccineCountService {
 	}
 
 	/**
-	 * 
-	 * @param day
-	 * @return
+	 * 입력 날짜에 해당하는 여러개 정보 리스트에 저장
+	 * @param day 날짜 
+	 * @return existDayList
 	 */
 	public ArrayList existDayList(String day) {
 
@@ -65,11 +70,11 @@ public class VaccineCountService {
 		return existDayList;
 	}
 
-
 	/**
-	 * 
-	 * @param resion
-	 * @return
+	 * 중복 체크
+	 * 날짜 존재 유무 조회
+	 * @param region 지역
+	 * @return 있으면 index 번호, 없으면 -1
 	 */
 	public int existRegion(String region) {
 		for (int index = 0; index < list.size(); index++) {
@@ -80,6 +85,11 @@ public class VaccineCountService {
 		return -1;
 	}
 
+	/**
+	 * 입력 지역에 해당하는 여러개 정보 리스트에 저장
+	 * @param region 지역
+	 * @return existRegionList
+	 */
 	public ArrayList existRegionList(String region) {
 
 		existRegionList.clear();
@@ -92,11 +102,11 @@ public class VaccineCountService {
 	}
 
 	/**
-	 * 
-	 * @param dto
+	 * 백신 접종수 정보 추가 
+	 * @param dto 접종 수  
 	 * @throws DuplicateException
 	 */
-	public void addCenter(VaccineCount dto) throws DuplicateException  {
+	public void addVaccineImfo(VaccineCount dto) throws DuplicateException  {
 		int index = existidKey(dto.getIdKey());
 		if (index >= 0) {
 			throw new DuplicateException(Integer.toString(dto.getIdKey()));
@@ -106,8 +116,8 @@ public class VaccineCountService {
 	}
 
 	/**
-	 * 
-	 * @return
+	 * 접종 수 초기화 등록 
+	 * @return 리스트 크기
 	 * @throws DuplicateException
 	 */
 	public int initCount() throws DuplicateException {
@@ -122,58 +132,58 @@ public class VaccineCountService {
 		VaccineCount dto9 = new VaccineCount(9, "21-06-02", "세종특별자치시", 2247, 42, 31476, 10517);
 		VaccineCount dto10 = new VaccineCount(10, "21-06-02", "강원도", 19585, 1049, 245683, 81041);
 		VaccineCount dto11 = new VaccineCount(11,"21-06-03", "전국", 381551, 22229, 6741993, 2220728);
-		addCenter(dto1);
-		addCenter(dto2);
-		addCenter(dto3);
-		addCenter(dto4);
-		addCenter(dto5);
-		addCenter(dto6);
-		addCenter(dto7);
-		addCenter(dto8);
-		addCenter(dto9);
-		addCenter(dto10);
-		addCenter(dto11);
+		addVaccineImfo(dto1);
+		addVaccineImfo(dto2);
+		addVaccineImfo(dto3);
+		addVaccineImfo(dto4);
+		addVaccineImfo(dto5);
+		addVaccineImfo(dto6);
+		addVaccineImfo(dto7);
+		addVaccineImfo(dto8);
+		addVaccineImfo(dto9);
+		addVaccineImfo(dto10);
+		addVaccineImfo(dto11);
 
 		return list.size();
 	}
 
-
 	/**
-	 * @param idKey
-	 * @param day
-	 * @param region
-	 * @param yesterdayFirst
-	 * @param yesterdaySecond
-	 * @param totalFirst
-	 * @param totalSecond
+	 * 추가 등록 
+	 * @param idKey 고유번호
+	 * @param day 날짜 
+	 * @param region 지역
+	 * @param yesterdayFirst 전날 1차 접종 수
+	 * @param yesterdaySecond 전날 2차 접종 수
+	 * @param totalFirst 누적 접종수
+	 * @param totalSecond 누적 접종수
 	 * @throws DuplicateException
 	 */
 	public void addVacciCount(int idKey, String day, String region, int yesterdayFirst, int yesterdaySecond, int totalFirst, int totalSecond) throws DuplicateException {
 		VaccineCount dto = new VaccineCount(idKey, day, region, yesterdayFirst, yesterdaySecond, totalFirst, totalSecond);
 
-		addCenter(dto);
+		addVaccineImfo(dto);
 	} 	
 
 	/**
-	 * 
-	 * @return
+	 * 전체 조회
+	 * @return list
 	 */
 	public ArrayList<VaccineCount> getList() {
 		return list;
 	}
 
 	/**
-	 * 
-	 * @return
+	 * 리스트 크기 조회
+	 * @return list 크기
 	 */
 	public int getCount() {
 		return list.size();
 	}
 
 	/**
-	 * 
-	 * @param region
-	 * @return
+	 * 지역으로 리스트 조회
+	 * @param region 지역
+	 * @return 지역에 해당하는 리스트 
 	 * @throws RecordNotFoundException
 	 */
 	public VaccineCount getRegionCount(String region) throws RecordNotFoundException {
@@ -185,9 +195,9 @@ public class VaccineCountService {
 	}
 
 	/**
-	 * 
-	 * @param region
-	 * @return
+	 * 지역으로 전날 1차 접종자 수 조회
+	 * @param region 지역
+	 * @return 지역에 해당하는 전날 1차 접종자 수 
 	 * @throws RecordNotFoundException
 	 */
 	public int getRegionCountFirst(String region) throws RecordNotFoundException {
@@ -198,6 +208,13 @@ public class VaccineCountService {
 		throw new RecordNotFoundException(region);
 	}
 
+	/**
+	 * 날짜, 지역으로 1차 접종자 수 조회
+	 * 동일 날짜, 동일 지역이 많으므로 둘의 index가 일치하는 리스트 조회해서 반환
+	 * @param day 날짜
+	 * @param region 지역
+	 * @return 전날 1차 접종자 수, 없으면 -1
+	 */
 	public int getRegionCountFirst(String day, String region) {
 
 		existDayList(day);
@@ -216,10 +233,11 @@ public class VaccineCountService {
 		}
 		return -1;
 	}
+
 	/**
-	 * 
-	 * @param region
-	 * @return
+	 * 지역에 해당하는 전날 2차 접종자 수 조회
+	 * @param region 지역
+	 * @return 2차 접종자 수 
 	 * @throws RecordNotFoundException
 	 */
 	public int getRegionCountSecond(String region) throws RecordNotFoundException {
@@ -229,7 +247,15 @@ public class VaccineCountService {
 		} 
 		throw new RecordNotFoundException(region);
 	}
-
+	
+	/**
+	 * 날짜, 지역으로 2차 접종자 수 조회
+	 * 동일 날짜, 동일 지역이 많으므로 둘의 index가 일치하는 리스트 조회해서 반환
+	 * @param day 날짜
+	 * @param region 지역
+	 * @return 2차 접종자 수, 없으면 -1
+	 * @throws RecordNotFoundException
+	 */
 	public int getRegionCountSecond(String day, String region) throws RecordNotFoundException {
 
 		existDayList(day);
@@ -250,9 +276,9 @@ public class VaccineCountService {
 	}
 
 	/**
-	 * 
-	 * @param region
-	 * @return
+	 * 지역 정보와 맞는 누적 1차 접종자 수
+	 * @param region 지역
+	 * @return 누적 1차 접종자 수
 	 * @throws RecordNotFoundException
 	 */
 	public int getRegionCountTotalFirst(String region) throws RecordNotFoundException {
@@ -264,10 +290,10 @@ public class VaccineCountService {
 	}
 
 	/**
-	 * 
-	 * @param day
-	 * @param region
-	 * @return
+	 * 날짜, 지역 정보에 해당하는 누적 1차 접종자 수
+	 * @param day 날짜
+	 * @param region 지역
+	 * @return 누적 1차 접종자 수
 	 * @throws RecordNotFoundException
 	 */
 	public int getRegionCountTotalFirst(String day, String region) throws RecordNotFoundException {
@@ -288,10 +314,11 @@ public class VaccineCountService {
 		}
 		return -1;
 	}
+	
 	/**
-	 * 
-	 * @param region
-	 * @return
+	 * 지역 정보와 맞는 누적 2차 접종자 수
+	 * @param region 지역
+	 * @return 2차 접종자 수
 	 * @throws RecordNotFoundException
 	 */
 	public int getRegionCountTotalSecond(String region) throws RecordNotFoundException {
@@ -302,6 +329,13 @@ public class VaccineCountService {
 		throw new RecordNotFoundException(region);
 	}
 
+	/**
+	 * 날짜, 지역 정보에 해당하는 누적 2차 접종자 수
+	 * @param day 날짜
+	 * @param region 지역
+	 * @return 누적 2차 접종자 수
+	 * @throws RecordNotFoundException
+	 */
 	public int getRegionCountTotalSecond(String day, String region) throws RecordNotFoundException {
 		existDayList(day);
 		existRegionList(region);
@@ -319,29 +353,22 @@ public class VaccineCountService {
 		}
 		return -1;
 	}
-	
-
-	/**
-	 * 헤당 일자 전체 내용 
-	 * 
-	 */
 
 
 	/**
-	 * 
-	 * @return
+	 * 리스트 내용 삭제 
+	 * @return 리스트 크기
 	 */
 	public int removeCountAll() {
 		list.clear();
 		return list.size();
-
 	}
 
 	/**
-	 * 
-	 * @param day
-	 * @param region
-	 * @return
+	 * 날짜, 지역에 해당하는 리스트 삭제
+	 * @param day 날짜
+	 * @param region 지역
+	 * @return 리스트 삭제 
 	 * @throws RecordNotFoundException
 	 */
 	public VaccineCount removeCount(String day, String region) throws RecordNotFoundException{
@@ -357,9 +384,9 @@ public class VaccineCountService {
 	}
 
 	/**
-	 * 
-	 * @param dto
-	 * @return
+	 * 접종자 수 데이터 변경
+	 * @param dto 접종자 수 데이터
+	 * @return 지역, 날짜가 맞으면 true;
 	 * @throws RecordNotFoundException
 	 */
 	public boolean setCount(VaccineCount dto) throws RecordNotFoundException {
@@ -376,10 +403,4 @@ public class VaccineCountService {
 	}
 
 
-	
-
 }
-
-
-
-

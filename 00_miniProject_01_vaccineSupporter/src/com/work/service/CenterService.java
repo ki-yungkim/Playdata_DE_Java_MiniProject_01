@@ -6,11 +6,21 @@ import com.work.exception.DuplicateException;
 import com.work.exception.RecordNotFoundException;
 import com.work.model.dto.CenterList;
 
+/**
+ * <pre>
+ * CenterList 구현 서비스 클래스 
+ * </pre>
+ * @author 김기영
+ * @version ver 1.0
+ * @since jdk 1.8
+ *
+ */
 public class CenterService {
 
-	/** 센터 정보들을 저장관리하기 위한 자료 저장구조 : Generic*/
+	/** 센터 정보들을 저장관리하기 위한 자료 저장구조 : Generic */
 	private ArrayList<CenterList> list = new ArrayList<CenterList>();
 	private ArrayList sameRegionList = new ArrayList();
+	
 	/** 기본생성자 : 초기 센터 목록 등록 수행 */
 	public CenterService() {}
 
@@ -71,6 +81,13 @@ public class CenterService {
 		return -1;
 	}
 
+	/**
+	 * 간략 주소로 센터 정보 조회
+	 * 같은 지역에 존재하는 여러 센터 출력을 위해 arraylist 사용 
+	 * 입력한 주소(시군구)에 맞는 정보들 sameRegionList에 저장
+	 * @param address 주소
+	 * @return sameRegionList
+	 */
 	public ArrayList existAddressList(String address) {
 
 		sameRegionList.clear();
@@ -99,8 +116,8 @@ public class CenterService {
 
 	/**
 	 * 센터등록	
-	 * @param dto
-	 * @throws DuplicateException
+	 * @param dto 센터 정보 
+	 * @throws DuplicateException 
 	 */
 	public void addCenter(CenterList dto) throws DuplicateException  {
 		int index = existPhoneNumber(dto.getPhoneNumber());
@@ -113,7 +130,7 @@ public class CenterService {
 
 	/**
 	 * 초기화 등록 
-	 * @return
+	 * @return 리스트 크기 
 	 * @throws DuplicateException
 	 */
 	public int initCenter() throws DuplicateException {
@@ -131,19 +148,17 @@ public class CenterService {
 		addCenter(dto5);
 		addCenter(dto6);
 
-
 		return list.size();
 	}
 
-
 	/**
 	 * 센터 추가등록
-	 * @param centerName
-	 * @param facilityName
-	 * @param postcode
-	 * @param address
-	 * @param addressDetail
-	 * @param phoneNumber
+	 * @param centerName 센터명
+	 * @param facilityName 시설명
+	 * @param postcode 우편번호
+	 * @param address 주소 
+	 * @param addressDetail 상세주소
+	 * @param phoneNumber 전화번호
 	 * @throws DuplicateException 
 	 */
 	public void addCenter(String centerName, String facilityName, String postcode, String address, String addressDetail, String phoneNumber) throws DuplicateException {
@@ -151,12 +166,6 @@ public class CenterService {
 
 		addCenter(dto);
 	} 	
-
-
-
-
-
-
 
 	/**
 	 * 전체조회 - 관리자 전용 
@@ -173,7 +182,6 @@ public class CenterService {
 	public int getCount() {
 		return list.size();
 	}
-
 
 	/**
 	 * 센터명으로 조회
@@ -202,7 +210,6 @@ public class CenterService {
 		}
 		throw new RecordNotFoundException(facilityName);
 	}
-
 
 	/**
 	 * 센터 주소(시 군 구)로 조회
@@ -246,7 +253,6 @@ public class CenterService {
 		return list.size();
 	}
 
-
 	/**
 	 * 센터 리스트 중 입력한 하나 삭제 
 	 * @param centerName 센터 이름
@@ -258,7 +264,6 @@ public class CenterService {
 		if (index >= 0) {
 			return list.remove(index);
 		}
-
 		throw new RecordNotFoundException(centerName);
 	}
 
@@ -276,9 +281,5 @@ public class CenterService {
 		}
 		throw new RecordNotFoundException(dto.getCenterName());
 	}
-
-
-
-
 
 }

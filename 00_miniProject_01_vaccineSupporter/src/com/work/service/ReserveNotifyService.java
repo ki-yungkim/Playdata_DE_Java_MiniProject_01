@@ -7,9 +7,16 @@ import com.work.exception.DuplicateException;
 import com.work.exception.RecordNotFoundException;
 import com.work.model.dto.ReserveMember;
 
+/**
+ * <pre>
+ * ReserveMember 구현 서비스 클래스
+ * </pre>
+ * @author 김기영
+ * @version ver 1.0
+ * @since jdk1.8
+ *
+ */
 public class ReserveNotifyService {
-
-
 
 	public ArrayList<ReserveMember> list = new ArrayList<ReserveMember>();
 
@@ -46,7 +53,7 @@ public class ReserveNotifyService {
 
 	/**
 	 * 예약자 멤버 등록
-	 * @param dto
+	 * @param dto 예약자 멤버
 	 * @throws DuplicateException
 	 */
 	public void addMember(ReserveMember dto) throws DuplicateException  {
@@ -59,8 +66,8 @@ public class ReserveNotifyService {
 	}
 
 	/**
-	 * 
-	 * @return
+	 * 예약자 초기 등록
+	 * @return 리스트 크기
 	 * @throws DuplicateException
 	 */
 	public int initReserve() throws DuplicateException {
@@ -70,7 +77,6 @@ public class ReserveNotifyService {
 		ReserveMember dto4 = new ReserveMember("김삼영", "010-1234-4000", "인천광역시", "900401-1400000", "화이자", "210604");
 		ReserveMember dto5 = new ReserveMember("김사영", "010-1234-5000", "울산광역시", "700501-1500000", "모더나", "210605");
 		
-				
 		addMember(dto1);	
 		addMember(dto2);	
 		addMember(dto3);	
@@ -92,10 +98,7 @@ public class ReserveNotifyService {
 	 */
 	public void addMember(String name, String phoneNumber, String address, String idNumber, String vaccine, String firstVaccination) throws DuplicateException {
 		ReserveMember dto = new ReserveMember(name, phoneNumber, address, idNumber, vaccine, firstVaccination);
-
-		// 자동계산으로 하도록 메서드 추가
-		//dto.secondVaccDay() 
-		//dto.callDay()
+		
 		addMember(dto);
 	} 	
 
@@ -226,10 +229,10 @@ public class ReserveNotifyService {
 	
 	
 	/**
-	 * 로그인
-	 * @param name
-	 * @param idNumber
-	 * @return
+	 * 이름, 주민번호로 로그인
+	 * @param name 이름
+	 * @param idNumber 주민번호
+	 * @return 정보가 있으면 true 
 	 * @throws RecordNotFoundException
 	 * @throws CommonException
 	 */
@@ -247,9 +250,9 @@ public class ReserveNotifyService {
 	
 	/**
 	 * 관리자 로그인
-	 * @param id
-	 * @param pw
-	 * @return
+	 * @param id 관리자 아이디 admin00
+	 * @param pw 관리자 비밀번호 password00
+	 * @return 정보 맞으면 true
 	 * @throws RecordNotFoundException
 	 * @throws CommonException
 	 */
@@ -262,5 +265,5 @@ public class ReserveNotifyService {
 		throw new CommonException("회원의 정보가 올바르지 않습니다.");
 	}
 	
+	
 }
-

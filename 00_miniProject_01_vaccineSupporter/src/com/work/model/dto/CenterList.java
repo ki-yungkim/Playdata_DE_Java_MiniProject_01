@@ -1,5 +1,22 @@
 package com.work.model.dto;
 
+/**
+ * <pre>
+ * 예방접종센터 정보 도메인 클래스 
+ * 
+ * ## 센터 정보 
+ * 	1. 센터명
+ * 	2. 시설명
+ * 	3. 우편번호
+ * 	4. 주소 (시군구)
+ * 	5. 상세 주소
+ * 	6. 전화번호 
+ * 
+ * </pre> 
+ * @author 김기영
+ * @version ver 1.0
+ * @since jdk1.8
+ */
 public class CenterList {
 
 	private String centerName;
@@ -23,15 +40,14 @@ public class CenterList {
 	
 	/**
 	 * 필수 생성자 
-	 * @param centerName
-	 * @param facilityName
-	 * @param postcode
-	 * @param address
-	 * @param addressDetail
-	 * @param phoneNumber
+	 * @param centerName 센터명
+	 * @param facilityName 시설명
+	 * @param postcode 우편번호
+	 * @param address 주소(시, 군, 구 단위)
+	 * @param addressDetail 상세주소
+	 * @param phoneNumber 전화번호 
 	 */
-	public CenterList(String centerName, String facilityName, String postcode, String address, String addressDetail,
-			String phoneNumber) {
+	public CenterList(String centerName, String facilityName, String postcode, String address, String addressDetail, String phoneNumber) {
 		this.centerName = centerName;
 		this.facilityName = facilityName;
 		this.postcode = postcode;
@@ -202,5 +218,4 @@ public class CenterList {
 		return builder.toString();
 	}
 	
-
 }

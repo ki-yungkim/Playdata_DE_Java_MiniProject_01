@@ -1,36 +1,49 @@
 package com.work.model.dto;
 
+/**
+ * <pre>
+ * 2차 접종 알림 예약등록자 정보 도메인 클래스 
+ * 
+ * ## 등록자 정보
+ * 1. 이름
+ * 2. 전화번호
+ * 3. 주소
+ * 4. 주민번호
+ * 5. 백신 종류
+ * 6. 1차 접종일 
+ * 
+ * 
+ * </pre> 
+ * @author 김기영
+ * @version ver 1.0
+ * @since jdk1.8
+ */
 public class ReserveMember {
 
 	private String name;
-	
-	private String phoneNumber;
-	
-	private String address;
-	
-	private String idNumber;
-	
-	private String vaccineName;
-	
-	private String firstVaccination;
-	
-	private String secondVaccDay;
-	
-	private String callDay;
 
-	/**
-	 * 
-	 */
+	private String phoneNumber;
+
+	private String address;
+
+	private String idNumber;
+
+	private String vaccineName;
+
+	private String firstVaccination;
+
+	/** 초기 생성자 */
 	public ReserveMember() {
 	}
 
 	/**
-	 * @param name
-	 * @param phoneNumber
-	 * @param address
-	 * @param idNumber
-	 * @param vaccine
-	 * @param firstVaccination
+	 * 필수 생성자 
+	 * @param name 이름
+	 * @param phoneNumber 전화번호
+	 * @param address 주소
+	 * @param idNumber 주민번호
+	 * @param vaccine 맞은 백신 종류
+	 * @param firstVaccination 1차 접종일
 	 */
 	public ReserveMember(String name, String phoneNumber, String address, String idNumber, String vaccine,
 			String firstVaccination) {
@@ -40,23 +53,6 @@ public class ReserveMember {
 		this.idNumber = idNumber;
 		this.vaccineName = vaccine;
 		this.firstVaccination = firstVaccination;
-	}
-
-	/**
-	 * @param name
-	 * @param phoneNumber
-	 * @param address
-	 * @param idNumber
-	 * @param vaccine
-	 * @param firstVaccination
-	 * @param secondVaccinationDay
-	 * @param callDay
-	 */
-	public ReserveMember(String name, String phoneNumber, String address, String idNumber, String vaccine,
-			String firstVaccination, String secondVaccinationDay, String callDay) {
-		this(name,phoneNumber, address, idNumber, vaccine, firstVaccination);
-		this.secondVaccDay = secondVaccinationDay;
-		this.callDay = callDay;
 	}
 
 	/**
@@ -143,45 +139,16 @@ public class ReserveMember {
 		this.firstVaccination = firstVaccination;
 	}
 
-	/**
-	 * @return the secondVaccinationDay
-	 */
-	public String getSecondVaccinationDay() {
-		return secondVaccDay;
-	}
-
-	/**
-	 * @param secondVaccinationDay the secondVaccinationDay to set
-	 */
-	public void setSecondVaccinationDay(String secondVaccinationDay) {
-		this.secondVaccDay = secondVaccinationDay;
-	}
-
-	/**
-	 * @return the callDay
-	 */
-	public String getCallDay() {
-		return callDay;
-	}
-
-	/**
-	 * @param callDay the callDay to set
-	 */
-	public void setCallDay(String callDay) {
-		this.callDay = callDay;
-	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		result = prime * result + ((callDay == null) ? 0 : callDay.hashCode());
 		result = prime * result + ((firstVaccination == null) ? 0 : firstVaccination.hashCode());
 		result = prime * result + ((idNumber == null) ? 0 : idNumber.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
-		result = prime * result + ((secondVaccDay == null) ? 0 : secondVaccDay.hashCode());
 		result = prime * result + ((vaccineName == null) ? 0 : vaccineName.hashCode());
 		return result;
 	}
@@ -199,11 +166,6 @@ public class ReserveMember {
 			if (other.address != null)
 				return false;
 		} else if (!address.equals(other.address))
-			return false;
-		if (callDay == null) {
-			if (other.callDay != null)
-				return false;
-		} else if (!callDay.equals(other.callDay))
 			return false;
 		if (firstVaccination == null) {
 			if (other.firstVaccination != null)
@@ -224,11 +186,6 @@ public class ReserveMember {
 			if (other.phoneNumber != null)
 				return false;
 		} else if (!phoneNumber.equals(other.phoneNumber))
-			return false;
-		if (secondVaccDay == null) {
-			if (other.secondVaccDay != null)
-				return false;
-		} else if (!secondVaccDay.equals(other.secondVaccDay))
 			return false;
 		if (vaccineName == null) {
 			if (other.vaccineName != null)
@@ -252,13 +209,7 @@ public class ReserveMember {
 		builder.append(vaccineName);
 		builder.append(", ");
 		builder.append(firstVaccination);
-		builder.append(", ");
-		builder.append(secondVaccDay);
-		builder.append(", ");
-		builder.append(callDay);
 		return builder.toString();
 	}
-	
-	
-	
+
 }

@@ -1,13 +1,31 @@
 package com.work.model.dto;
 
+/**
+ * <pre>
+ * 백신 접종자 수 정보 도메인 클래스 
+ * </pre>
+ * 
+ * ## 접종 정보 
+ * 	1. 고유번호
+ * 	2. 날짜
+ * 	3. 지역
+ * 	4. 전날 1차 접종
+ * 	5. 전날 2차 접종
+ * 	6. 누적 1차 접종
+ * 	7. 누적 2차 접종 
+ *
+ * @author 김기영
+ * @version ver 1.0
+ * @since jdk1.8
+ */
 public class VaccineCount {
 
 	private int idKey;
-	
+
 	private String day;
-	
+
 	private String region;
-	
+
 	private int yesterdayFirst;
 
 	private int yesterdaySecond;
@@ -16,24 +34,22 @@ public class VaccineCount {
 
 	private int totalSecond;
 
-
-
+	/** 초기 생성자 */
 	public VaccineCount() {
 	}
 
-
-
 	/**
-	 * @param idKey
-	 * @param day
-	 * @param region
-	 * @param yesterdayFirst
-	 * @param yesterdaySecond
-	 * @param totalFirst
-	 * @param totalSecond
+	 * 필수 생성자 
+	 * @param idKey 고유번호
+	 * @param day 기준 일자 
+	 * @param region 지역
+	 * @param yesterdayFirst 전날 1차 접종 수
+	 * @param yesterdaySecond 전날 2차 접종 수
+	 * @param totalFirst 누적 접종 수
+	 * @param totalSecond 누적 접종 수
 	 */
-	public VaccineCount(int idKey, String day, String region, int yesterdayFirst, int yesterdaySecond, int totalFirst,
-			int totalSecond) {
+	public VaccineCount(int idKey, String day, String region, int yesterdayFirst, int yesterdaySecond, 
+			int totalFirst, int totalSecond) {
 		this.idKey = idKey;
 		this.day = day;
 		this.region = region;
@@ -43,18 +59,12 @@ public class VaccineCount {
 		this.totalSecond = totalSecond;
 	}
 
-
-
-	
-	
 	/**
 	 * @return the idKey
 	 */
 	public int getIdKey() {
 		return idKey;
 	}
-
-
 
 	/**
 	 * @param idKey the idKey to set
@@ -63,16 +73,12 @@ public class VaccineCount {
 		this.idKey = idKey;
 	}
 
-
-
 	/**
 	 * @return the day
 	 */
 	public String getDay() {
 		return day;
 	}
-
-
 
 	/**
 	 * @param day the day to set
@@ -81,16 +87,12 @@ public class VaccineCount {
 		this.day = day;
 	}
 
-
-
 	/**
 	 * @return the region
 	 */
 	public String getRegion() {
 		return region;
 	}
-
-
 
 	/**
 	 * @param region the region to set
@@ -99,16 +101,12 @@ public class VaccineCount {
 		this.region = region;
 	}
 
-
-
 	/**
 	 * @return the yesterdayFirst
 	 */
 	public int getYesterdayFirst() {
 		return yesterdayFirst;
 	}
-
-
 
 	/**
 	 * @param yesterdayFirst the yesterdayFirst to set
@@ -117,16 +115,12 @@ public class VaccineCount {
 		this.yesterdayFirst = yesterdayFirst;
 	}
 
-
-
 	/**
 	 * @return the yesterdaySecond
 	 */
 	public int getYesterdaySecond() {
 		return yesterdaySecond;
 	}
-
-
 
 	/**
 	 * @param yesterdaySecond the yesterdaySecond to set
@@ -135,16 +129,12 @@ public class VaccineCount {
 		this.yesterdaySecond = yesterdaySecond;
 	}
 
-
-
 	/**
 	 * @return the totalFirst
 	 */
 	public int getTotalFirst() {
 		return totalFirst;
 	}
-
-
 
 	/**
 	 * @param totalFirst the totalFirst to set
@@ -153,8 +143,6 @@ public class VaccineCount {
 		this.totalFirst = totalFirst;
 	}
 
-
-
 	/**
 	 * @return the totalSecond
 	 */
@@ -162,16 +150,12 @@ public class VaccineCount {
 		return totalSecond;
 	}
 
-
-
 	/**
 	 * @param totalSecond the totalSecond to set
 	 */
 	public void setTotalSecond(int totalSecond) {
 		this.totalSecond = totalSecond;
 	}
-
-
 
 	@Override
 	public int hashCode() {
@@ -181,8 +165,6 @@ public class VaccineCount {
 		result = prime * result + ((region == null) ? 0 : region.hashCode());
 		return result;
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -206,8 +188,6 @@ public class VaccineCount {
 		return true;
 	}
 
-
-
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -224,13 +204,5 @@ public class VaccineCount {
 		builder.append(totalSecond);
 		return builder.toString();
 	}
-
-	
-
-
-
-
-
-	
 }
 

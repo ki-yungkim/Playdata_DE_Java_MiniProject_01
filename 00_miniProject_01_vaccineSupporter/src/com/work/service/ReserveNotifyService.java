@@ -54,7 +54,7 @@ public class ReserveNotifyService {
 	/**
 	 * 예약자 멤버 등록
 	 * @param dto 예약자 멤버
-	 * @throws DuplicateException
+	 * @throws DuplicateException 즁복 예외
 	 */
 	public void addMember(ReserveMember dto) throws DuplicateException  {
 		int index = existName(dto.getName());
@@ -68,7 +68,7 @@ public class ReserveNotifyService {
 	/**
 	 * 예약자 초기 등록
 	 * @return 리스트 크기
-	 * @throws DuplicateException
+	 * @throws DuplicateException 중복 예외
 	 */
 	public int initReserve() throws DuplicateException {
 		ReserveMember dto1 = new ReserveMember("홍길동", "010-1234-1000", "대전광역시", "900101-1100000", "화이자", "210601");
@@ -94,7 +94,7 @@ public class ReserveNotifyService {
 	 * @param idNumber 주민번호 
 	 * @param vaccine 백신종류
 	 * @param firstVaccination 1차 접종일
-	 * @throws DuplicateException 
+	 * @throws DuplicateException  중복 예외
 	 */
 	public void addMember(String name, String phoneNumber, String address, String idNumber, String vaccine, String firstVaccination) throws DuplicateException {
 		ReserveMember dto = new ReserveMember(name, phoneNumber, address, idNumber, vaccine, firstVaccination);
@@ -118,7 +118,7 @@ public class ReserveNotifyService {
 	 * 이름으로 조회 - 관리자용 
 	 * @param name 이름
 	 * @return 존재하면 정보, 없으면 데이터검색 예외
-	 * @throws RecordNotFoundException
+	 * @throws RecordNotFoundException 데이터 검색 예외
 	 */
 	public ReserveMember getListMember(String name) throws RecordNotFoundException {
 		int index = existName(name);
@@ -134,7 +134,7 @@ public class ReserveNotifyService {
 	 * @param name 이름
 	 * @param idNumber 주민번호
 	 * @return 존재하면 정보, 없으면 데이터검색 예외
-	 * @throws RecordNotFoundException
+	 * @throws RecordNotFoundException 데이터 검색 예외
 	 */
 	public ReserveMember getListMember(String name, String idNumber) throws RecordNotFoundException {
 		int indexName = existName(name);
@@ -162,7 +162,7 @@ public class ReserveNotifyService {
 	 * 예약자 정보 1개 삭제 - 관리자용
 	 * @param name 이름
 	 * @return 존재하면 삭제, 없으면 에러 
-	 * @throws RecordNotFoundException
+	 * @throws RecordNotFoundException 데이터 검색 예외
 	 */
 	public ReserveMember removeMemberList(String name) throws RecordNotFoundException {
 		int index = existName(name);
@@ -178,7 +178,7 @@ public class ReserveNotifyService {
 	 * @param name 이름
 	 * @param idNumber 주민번호
 	 * @return 존재하면 삭제, 없으면 에러 
-	 * @throws RecordNotFoundException
+	 * @throws RecordNotFoundException 데이터 검색 예외
 	 */
 	public ReserveMember removeMemberList(String name, String idNumber) throws RecordNotFoundException {
 		int indexName = existName(name);
@@ -195,7 +195,7 @@ public class ReserveNotifyService {
 	 * 이름 기준 정보 변경
 	 * @param dto 변경할 정보
 	 * @return 성공시 true, 실패시 false
-	 * @throws RecordNotFoundException
+	 * @throws RecordNotFoundException 데이터 검색 예외
 	 */
 	public boolean setMemberImfo(ReserveMember dto) throws RecordNotFoundException {
 		int index = existName(dto.getName());
@@ -212,7 +212,7 @@ public class ReserveNotifyService {
 	 * @param idNumber 주민번호
 	 * @param dto 변경할 정보 
 	 * @return 성공시 true, 실패시 false
-	 * @throws RecordNotFoundException
+	 * @throws RecordNotFoundException 데이터 검색 예외
 	 */
 	public boolean setMemberImfo(String name, String idNumber, ReserveMember dto) throws RecordNotFoundException {
 		int indexName = existName(name);
@@ -233,8 +233,8 @@ public class ReserveNotifyService {
 	 * @param name 이름
 	 * @param idNumber 주민번호
 	 * @return 정보가 있으면 true 
-	 * @throws RecordNotFoundException
-	 * @throws CommonException
+	 * @throws RecordNotFoundException 데이터 검색 예외
+	 * @throws CommonException 사용자 예외
 	 */
 	public boolean login(String name, String idNumber) throws RecordNotFoundException, CommonException {
 		try {
@@ -242,7 +242,7 @@ public class ReserveNotifyService {
 			if (dto.getIdNumber().equals(idNumber)) {
 				return true;
 			} 
-			throw new CommonException("회원의 정보가 올바르지 않습니다.");
+			throw new CommonException("정보가 올바르지 않습니다.");
 		} catch (RecordNotFoundException e) {
 			throw e;
 		}
@@ -253,8 +253,8 @@ public class ReserveNotifyService {
 	 * @param id 관리자 아이디 admin00
 	 * @param pw 관리자 비밀번호 password00
 	 * @return 정보 맞으면 true
-	 * @throws RecordNotFoundException
-	 * @throws CommonException
+	 * @throws RecordNotFoundException 데이터 검색 예외
+	 * @throws CommonException 사용자 예외
 	 */
 	public boolean adminLogin(String id, String pw) throws RecordNotFoundException, CommonException {
 		String adminId = "admin00";
@@ -262,7 +262,7 @@ public class ReserveNotifyService {
 		if (id.equals(adminId) &&  pw.equals(adminPw)) {
 			return true;
 		} 
-		throw new CommonException("회원의 정보가 올바르지 않습니다.");
+		throw new CommonException("정보가 올바르지 않습니다.");
 	}
 	
 	

@@ -117,7 +117,7 @@ public class CenterService {
 	/**
 	 * 센터등록	
 	 * @param dto 센터 정보 
-	 * @throws DuplicateException 
+	 * @throws DuplicateException 중복 예외
 	 */
 	public void addCenter(CenterList dto) throws DuplicateException  {
 		int index = existPhoneNumber(dto.getPhoneNumber());
@@ -131,7 +131,7 @@ public class CenterService {
 	/**
 	 * 초기화 등록 
 	 * @return 리스트 크기 
-	 * @throws DuplicateException
+	 * @throws DuplicateException 중복 예외
 	 */
 	public int initCenter() throws DuplicateException {
 		CenterList dto1 = new CenterList("강원도 평창군 예방접종센터", "평창읍 생활체육관", "25377", "강원도 평창군", "강원도 평창군 평창읍 산책길 38", "033-330-4835");
@@ -139,7 +139,12 @@ public class CenterService {
 		CenterList dto3 = new CenterList("경상남도 산청군 예방접종센터", "산청군 실내체육관", "52215", "경상남도 산청군", "경상남도 산청군 금서면 친환경로2631번길 39", "055-970-7548");
 		CenterList dto4 = new CenterList("광주광역시 광산구 예방접종센터", "광주보훈병원 재활체육관", "62284", "광주광역시 광산구", "광주광역시 광산구 첨단월봉로 99, 광주보훈병원", "062-960-6862");
 		CenterList dto5 = new CenterList("중앙 예방접종센터", "국립중앙의료원 D동", "4562", "서울특별시 중구", "서울특별시 중구 을지로 39길 29", "02-2260-7114");
-		CenterList dto6 = new CenterList("서울특별시 중구 예방접종센터 ", "충무스포츠센터", "4569", "서울특별시 중구", "서울특별시 중구 퇴계로 387", "02-3396-4503");
+		CenterList dto6 = new CenterList("서울특별시 중구 예방접종센터", "충무스포츠센터", "4569", "서울특별시 중구", "서울특별시 중구 퇴계로 387", "02-3396-4503");
+		CenterList dto7 = new CenterList("강원도 강릉시 예방접종센터", "강릉아레나", "25377", "강원도 평창군", "강원도 평창군 평창읍 산책길 38", "033-330-4835");
+		CenterList dto8 = new CenterList("경기도 안산시 단원구 예방접종센터", "올림픽기념관 체육관", "15335", "경기도 안산시", "경기도 안산시 단원구 적금로202", "031-369-1702");
+		CenterList dto9 = new CenterList("경상북도 고령군 예방접종센터", "주산체육관", "40136", "경상북도 고령군", "경상북도 고령군 대가야읍 주산순환길 91", "054-950-7950");
+		CenterList dto10 = new CenterList("충청남도 천안시 서북구 예방접종센터", "천안시 실내테니스장", "31157", "충청남도 천안시", "충청남도 천안시 서북구 번영로 208", "041-521-3013");
+		CenterList dto11 = new CenterList("충청북도 청주시 서원구 예방접종센터", "청주체육관", "28559", "충청북도 청주시", "충청북도 청주시 서원구 사직대로 229", "043-201-3253");
 
 		addCenter(dto1);
 		addCenter(dto2);
@@ -147,6 +152,11 @@ public class CenterService {
 		addCenter(dto4);
 		addCenter(dto5);
 		addCenter(dto6);
+		addCenter(dto7);
+		addCenter(dto8);
+		addCenter(dto9);
+		addCenter(dto10);
+		addCenter(dto11);
 
 		return list.size();
 	}
@@ -159,7 +169,7 @@ public class CenterService {
 	 * @param address 주소 
 	 * @param addressDetail 상세주소
 	 * @param phoneNumber 전화번호
-	 * @throws DuplicateException 
+	 * @throws DuplicateException  중복 예외
 	 */
 	public void addCenter(String centerName, String facilityName, String postcode, String address, String addressDetail, String phoneNumber) throws DuplicateException {
 		CenterList dto = new CenterList(centerName, facilityName, postcode, address, addressDetail, phoneNumber);
@@ -187,7 +197,7 @@ public class CenterService {
 	 * 센터명으로 조회
 	 * @param centerName
 	 * @return 존재하면 센터 정보, 없으면 데이터검색 예외
-	 * @throws RecordNotFoundException
+	 * @throws RecordNotFoundException 데이터 검색 예외
 	 */
 	public CenterList getListCenterName(String centerName) throws RecordNotFoundException {
 		int index = existCenterName(centerName);
@@ -201,7 +211,7 @@ public class CenterService {
 	 * 시설명으로 조회
 	 * @param facilityName
 	 * @return 존재하면 센터 정보, 없으면 데이터검색 예외
-	 * @throws RecordNotFoundException
+	 * @throws RecordNotFoundException 데이터 검색 예외
 	 */
 	public CenterList getListFacility(String facilityName) throws RecordNotFoundException {
 		int index = existFacilityName(facilityName);
@@ -214,7 +224,7 @@ public class CenterService {
 	/**
 	 * 센터 주소(시 군 구)로 조회
 	 * @param address
-	 * @throws RecordNotFoundException
+	 * @throws RecordNotFoundException 데이터 검색 예외
 	 */
 	public void getListAddress(String address)  throws RecordNotFoundException{
 		existAddressList(address);
@@ -233,7 +243,7 @@ public class CenterService {
 	 * 전화번호로 센터 조회 
 	 * @param phoneNumber 
 	 * @return 존재하면 센터 정보, 없으면 데이터검색 예외
-	 * @throws RecordNotFoundException
+	 * @throws RecordNotFoundException 데이터 검색 예외
 	 */
 	public CenterList getListPhone(String phoneNumber) throws RecordNotFoundException{
 		int index = existPhoneNumber(phoneNumber);
@@ -257,7 +267,7 @@ public class CenterService {
 	 * 센터 리스트 중 입력한 하나 삭제 
 	 * @param centerName 센터 이름
 	 * @return 존재하면 삭제, 없으면 에러 
-	 * @throws RecordNotFoundException
+	 * @throws RecordNotFoundException 데이터 검색 예외
 	 */
 	public CenterList removeCenterList(String centerName) throws RecordNotFoundException{
 		int index = existCenterName(centerName);
@@ -271,7 +281,7 @@ public class CenterService {
 	 * 센터 이름 기준 센터 정보 변경 
 	 * @param dto 변경할 정보 
 	 * @return 성공시 true, 실패시 false
-	 * @throws RecordNotFoundException
+	 * @throws RecordNotFoundException 데이터 검색 예외
 	 */
 	public boolean setCenterImfo(CenterList dto) throws RecordNotFoundException {
 		int index = existCenterName(dto.getCenterName());

@@ -34,8 +34,8 @@ public class Menu {
 
 	/**
 	 * 백신 도우미 메인메뉴
-	 * @throws IOException 
-	 * @throws NumberFormatException
+	 * @throws IOException  IO 예외
+	 * @throws NumberFormatException 숫자 형식 예외
 	 */
 	public void mainMenu() throws IOException, NumberFormatException {
 		printTitle("백신 도우미 메인메뉴");
@@ -76,19 +76,21 @@ public class Menu {
 			try {
 				login();
 			} catch (RecordNotFoundException e) {
-				System.out.println("RecordNotFoundException");
+				print("[실패] " + e.getMessage());
 			} catch (CommonException e) {
-				System.out.println("CommonException");
+				print("[실패] " + e.getMessage());
 			}
+			pause();
 			break;
 		case 9:
 			try {
 				adminLogin();
 			} catch (RecordNotFoundException e) {
-				System.out.println("RecordNotFoundException");
+				print(e.getMessage());
 			} catch (CommonException e) {
-				System.out.println("CommonException");
+				print(e.getMessage());
 			}
+			pause();
 			break;
 		case 0:
 			exitMenu();
@@ -134,7 +136,7 @@ public class Menu {
 
 	/**
 	 * 접종자 조회 메뉴
-	 * @throws IOException
+	 * @throws IOException IO 예외
 	 */
 	private void getYesterdayVacciCountMenu() throws IOException {
 		printTitle("접종자 조회 메뉴");
@@ -164,7 +166,7 @@ public class Menu {
 
 	/**
 	 * 누적 접종자 조회 메뉴
-	 * @throws IOException
+	 * @throws IOException IO 예외
 	 */
 	private void getTotalVacciCountMenu() throws IOException {
 		printTitle("누적 접종자 조회 메뉴");
@@ -193,10 +195,10 @@ public class Menu {
 
 	/**
 	 * 우선접종 대상자 조회 메뉴
-	 * @throws IOException
+	 * @throws IOException IO 예외
 	 */
 	private void prefferdMemberMenu() throws IOException {
-		printTitle("우선접종대상자 조회 메뉴");
+		printTitle("우선 접종대상자 조회 메뉴");
 
 		System.out.print("나이 : ");
 		int age = inputNumber();
@@ -205,7 +207,7 @@ public class Menu {
 		String job = inputString();
 
 		if (age >= 50) {
-			System.out.println("우선접종대상자입니다.");
+			System.out.println("우선 접종대상자입니다.");
 			System.out.print("근처 센터를 조회하시겠습니까? [O, X] ");
 			String ox = inputString();
 			if (ox.equals("O")) {
@@ -215,7 +217,7 @@ public class Menu {
 		} else {
 			switch(job) {
 			case "의료" :
-				System.out.println("우선접종대상자입니다.");
+				System.out.println("우선 접종대상자입니다.");
 				System.out.print("근처 센터를 조회하시겠습니까? [O, X] ");
 				String ox1 = inputString();
 				if (ox1.equals("O")) {
@@ -223,7 +225,7 @@ public class Menu {
 				}
 				break;
 			case "경찰" :
-				System.out.println("우선접종대상자입니다.");
+				System.out.println("우선 접종대상자입니다.");
 				System.out.print("근처 센터를 조회하시겠습니까? [O, X] ");
 				String ox2 = inputString();
 				if (ox2.equals("O")) {
@@ -231,7 +233,7 @@ public class Menu {
 				}
 				break;
 			case "소방" :
-				System.out.println("우선접종대상자입니다.");
+				System.out.println("우선 접종대상자입니다.");
 				System.out.print("근처 센터를 조회하시겠습니까? [O, X] ");
 				String ox3 = inputString();
 				if (ox3.equals("O")) {
@@ -239,7 +241,7 @@ public class Menu {
 				}
 				break;
 			case "군인" : 
-				System.out.println("우선접종대상자입니다.");
+				System.out.println("우선 접종대상자입니다.");
 				System.out.print("근처 센터를 조회하시겠습니까? [O, X] ");
 				String ox4 = inputString();
 				if (ox4.equals("O")) {
@@ -247,7 +249,7 @@ public class Menu {
 				}
 				break;
 			default :
-				System.out.println("우선접종대상자가 아닙니다.");
+				System.out.println("우선 접종대상자가 아닙니다.");
 				pause();
 			}
 		}
@@ -255,7 +257,7 @@ public class Menu {
 
 	/**
 	 * 예방접종센터 조회 메뉴
-	 * @throws IOException
+	 * @throws IOException IO 예외
 	 */
 	private void searchCenterMenu() throws IOException {
 		printTitle("예방접종센터 조회 메뉴");
@@ -299,7 +301,7 @@ public class Menu {
 
 	/**
 	 * 센터명으로 센터 정보 조회 메뉴
-	 * @throws IOException
+	 * @throws IOException IO 예외
 	 */
 	private void searchListCenterNameMenu() throws IOException {
 		printTitle("센터명으로 찾기 메뉴");
@@ -322,7 +324,7 @@ public class Menu {
 
 	/**
 	 * 시설명으로 센터 정보 조회 메뉴
-	 * @throws IOException
+	 * @throws IOException IO 예외
 	 */
 	private void searchListFacilityNameMenu() throws IOException {
 		printTitle("시설명으로 찾기 메뉴");
@@ -344,9 +346,9 @@ public class Menu {
 
 	/**
 	 * 주소로 센터 정보 조회 메뉴
-	 * @throws RecordNotFoundException
-	 * @throws IOException 
-	 * @throws NumberFormatException 
+	 * @throws RecordNotFoundException 데이터 검색 예외
+	 * @throws IOException  IO 예외
+	 * @throws NumberFormatException 숫자형식 예외
 	 */
 	private void searchListAddressMenu() throws RecordNotFoundException, NumberFormatException, IOException  {
 		printTitle("주소로 찾기 메뉴");
@@ -368,7 +370,7 @@ public class Menu {
 	
 	/**
 	 * 전화번호로 센터 정보 조회 메뉴
-	 * @throws IOException
+	 * @throws IOException IO 예외
 	 */
 	private void searchListPhoneNumberMenu() throws IOException {
 		printTitle("전화번호로 찾기 메뉴");
@@ -390,7 +392,7 @@ public class Menu {
 
 	/**
 	 * 백신별 2차 접종 대기기간 조회 메뉴
-	 * @throws Exception
+	 * @throws Exception 예외
 	 */
 	private void waitVaccine() throws Exception {
 		printTitle("백신별 2차 접종 대기기간 조회");
@@ -477,9 +479,9 @@ public class Menu {
 	
 	/**
 	 * 2차 접종일 알림 등록자 로그인 메뉴
-	 * @throws RecordNotFoundException
-	 * @throws CommonException
-	 * @throws IOException
+	 * @throws RecordNotFoundException 데이터 검색 예외
+	 * @throws CommonException 사용자 예외
+	 * @throws IOException IO 예외
 	 */
 	private void login() throws RecordNotFoundException, CommonException, IOException {
 		printTitle("로그인 메뉴");
@@ -500,7 +502,7 @@ public class Menu {
 
 	/**
 	 * 백신 알림기능 신청자 정보 수정 서비스 메인메뉴
-	 * @throws IOException 
+	 * @throws IOException IO 예외
 	 */
 	private void secondVaccineImfoMenu() throws IOException {
 		printTitle("백신 알림기능 신청자 정보 관리 메뉴");
@@ -536,7 +538,7 @@ public class Menu {
 
 	/**
 	 * 2차 접종 알림 등록자 정보 조회 메뉴 
-	 * @throws IOException
+	 * @throws IOException IO 예외
 	 */
 	private void getInfo() throws IOException {
 		printTitle("내 정보 조회 메뉴");
@@ -560,7 +562,7 @@ public class Menu {
 
 	/**
 	 * 2차 접종 알림 등록자 정보 변경 메뉴 
-	 * @throws IOException
+	 * @throws IOException IO 예외
 	 */
 	private void setInfo() throws IOException {
 		printTitle("내 정보 변경 메뉴");
@@ -597,9 +599,9 @@ public class Menu {
 
 	/**
 	 * 관리자 로그인 메뉴
-	 * @throws RecordNotFoundException
-	 * @throws CommonException
-	 * @throws IOException 
+	 * @throws RecordNotFoundException 데이터 검색 예외
+	 * @throws CommonException 사용자 예외
+	 * @throws IOException IO 예외 
 	 */
 	private void adminLogin() throws RecordNotFoundException, CommonException, IOException {
 		printTitle("관리자 로그인 메뉴");
@@ -621,7 +623,7 @@ public class Menu {
 
 	/**
 	 * 관리자 서비스 메뉴
-	 * @throws IOException
+	 * @throws IOException IO 예외
 	 */
 	private void adminMainMenu() throws IOException {
 		printTitle("관리자 서비스 메인메뉴");
@@ -660,7 +662,7 @@ public class Menu {
 	/**
 	 * 관리자
 	 * 접종자 수 등록 메뉴
-	 * @throws IOException
+	 * @throws IOException IO 예외
 	 */
 	private void addVacciCountMenu() throws IOException {
 		printTitle("접종자 수 등록");
@@ -705,7 +707,7 @@ public class Menu {
 	/**
 	 * 관리자 
 	 * 센터 정보 변경 메뉴
-	 * @throws IOException
+	 * @throws IOException IO 예외
 	 */
 	private void setCenterInfoMenu() throws IOException {
 		printTitle("센터 정보 변경 메뉴");
@@ -796,7 +798,7 @@ public class Menu {
 	 * 구분선 출력
 	 */
 	public void printLine() {
-		System.out.println("************************");
+		System.out.println("********************************");
 	}
 
 	/**

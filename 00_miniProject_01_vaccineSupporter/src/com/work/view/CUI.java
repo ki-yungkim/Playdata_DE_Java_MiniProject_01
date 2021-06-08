@@ -17,8 +17,8 @@ public class CUI {
 
 	/**
 	 * 백신도우미 시스템 CUI 시작 메서드
-	 * @param args 
-	 * @throws DuplicateException 
+	 * @param args 메인
+	 * @throws DuplicateException  중복예외
 	 */
 	public static void main(String[] args) throws DuplicateException {
 		/* 관리 메뉴 */

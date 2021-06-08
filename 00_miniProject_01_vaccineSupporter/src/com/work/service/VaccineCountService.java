@@ -309,7 +309,7 @@ public class VaccineCountService {
 				int indexRegion = (int)existRegionList(region).get(i);
 				if(indexDay >= 0 && indexRegion >=0) {
 					if(indexDay == indexRegion) {
-						return list.get(indexDay).getYesterdayFirst();
+						return list.get(indexDay).getYesterdaySecond();
 					}
 				}
 			}

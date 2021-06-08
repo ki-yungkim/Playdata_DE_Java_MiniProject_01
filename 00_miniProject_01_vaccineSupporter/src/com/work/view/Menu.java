@@ -155,6 +155,12 @@ public class Menu {
 			int resultFirst = vacciService.getRegionCountFirst(day, region);
 			int resultSecond = vacciService.getRegionCountSecond(day, region);
 			System.out.println();
+			if (resultFirst == -1|| resultSecond == -1) {
+				System.out.println("잘못된 형식을 입력하셨습니다");
+				pause();
+				return;
+				
+			}
 			print(day + " 날짜의 " +  region + " 지역 1차 접종자 수는 " + utility.commaThousand(resultFirst) + "명입니다." );
 			print(day + " 날짜의 " + region + " 지역 2차 접종자 수는 " + utility.commaThousand(resultSecond) + "명입니다." );
 			pause();
@@ -182,6 +188,12 @@ public class Menu {
 		try {
 			int resultFirst = vacciService.getRegionCountTotalFirst(day, region);
 			int resultSecond = vacciService.getRegionCountTotalSecond(day, region);
+			if (resultFirst == -1|| resultSecond == -1) {
+				System.out.println("잘못된 형식을 입력하셨습니다");
+				pause();
+				return;
+			}
+			
 			System.out.println();
 			print(day + " 날짜의 " + region + " 지역 누적 1차 접종자 수는 " + utility.commaThousand(resultFirst) + "명입니다." );
 			print(day + " 날짜의 " + region + " 지역 누적 2차 접종자 수는 " + utility.commaThousand(resultSecond) + "명입니다." );
@@ -310,7 +322,8 @@ public class Menu {
 
 		try {
 			CenterList result = service.getListCenterName(centerName);
-			System.out.println("센터명, 시설명, 우편번호, 주소, 상세주소 사무실전화번호");
+			System.out.println("센터명, 시설명, 우편번호, 주소, 상세주소, 사무실전화번호");
+			System.out.println();
 			System.out.println(result);
 			pause();
 			searchCenterMenu();
@@ -469,7 +482,7 @@ public class Menu {
 
 		try {
 			notifyService.addMember(name, phoneNumber, address, idNumber, vaccineName, firstDay);
-			print("[등록 성공] " + name + "님의 2차 접종일 알림 문자 연락이 갈 예정입니다.");
+			print("[등록 성공] " + name + "님의 2차 접종일 1주일 전에 알림 문자 연락이 갈 예정입니다.");
 			pause();
 		} catch (DuplicateException e) {
 			e.printStackTrace();

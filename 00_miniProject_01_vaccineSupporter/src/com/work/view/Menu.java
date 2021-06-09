@@ -322,7 +322,7 @@ public class Menu {
 
 		try {
 			CenterList result = service.getListCenterName(centerName);
-			System.out.println("센터명, 시설명, 우편번호, 주소, 상세주소, 사무실전화번호");
+			System.out.println("[센터명, 시설명, 우편번호, 주소, 상세주소, 사무실전화번호]");
 			System.out.println();
 			System.out.println(result);
 			pause();
@@ -346,7 +346,8 @@ public class Menu {
 
 		try {
 			CenterList result = service.getListFacility(facilityName);
-			System.out.println("센터명, 시설명, 우편번호, 주소, 상세주소 사무실전화번호");
+			System.out.println("[센터명, 시설명, 우편번호, 주소, 상세주소 사무실전화번호]");
+			System.out.println();
 			System.out.println(result);
 			pause();
 			searchCenterMenu();
@@ -369,7 +370,8 @@ public class Menu {
 		String adress = inputString();
 
 		try {
-			System.out.println("센터명, 시설명, 우편번호, 주소, 상세주소 사무실전화번호");
+			System.out.println("[센터명, 시설명, 우편번호, 주소, 상세주소 사무실전화번호]");
+			System.out.println();
 			service.getListAddress(adress);
 			pause();
 			searchCenterMenu();
@@ -392,7 +394,8 @@ public class Menu {
 
 		try {
 			CenterList result = service.getListPhone(phoneNumber);
-			System.out.println("센터명, 시설명, 우편번호, 주소, 상세주소 사무실전화번호");
+			System.out.println("[센터명, 시설명, 우편번호, 주소, 상세주소 사무실전화번호]");
+			System.out.println();
 			System.out.println(result);
 			pause();
 			searchCenterMenu();

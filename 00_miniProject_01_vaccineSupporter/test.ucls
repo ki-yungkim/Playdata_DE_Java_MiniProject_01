@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="com.work.view.Menu" project="00_miniProject_01_vaccineSupporter" 
+    file="/00_miniProject_01_vaccineSupporter/src/com/work/view/Menu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1308" y="869"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="com.work.view.CUI" project="00_miniProject_01_vaccineSupporter" 
+    file="/00_miniProject_01_vaccineSupporter/src/com/work/view/CUI.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="180" y="68"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.work.util.Utility" project="00_miniProject_01_vaccineSupporter" 
+    file="/00_miniProject_01_vaccineSupporter/src/com/work/util/Utility.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="411" y="1194"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.work.service.VaccineCountService" project="00_miniProject_01_vaccineSupporter" 
+    file="/00_miniProject_01_vaccineSupporter/src/com/work/service/VaccineCountService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="420" y="831"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="com.work.service.ReserveNotifyService" 
+    project="00_miniProject_01_vaccineSupporter" 
+    file="/00_miniProject_01_vaccineSupporter/src/com/work/service/ReserveNotifyService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1037" y="751"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.work.service.CenterService" project="00_miniProject_01_vaccineSupporter" 
+    file="/00_miniProject_01_vaccineSupporter/src/com/work/service/CenterService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="719" y="786"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="com.work.model.dto.VaccineCount" project="00_miniProject_01_vaccineSupporter" 
+    file="/00_miniProject_01_vaccineSupporter/src/com/work/model/dto/VaccineCount.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="420" y="283"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="com.work.model.dto.ReserveMember" project="00_miniProject_01_vaccineSupporter" 
+    file="/00_miniProject_01_vaccineSupporter/src/com/work/model/dto/ReserveMember.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1029" y="253"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="com.work.model.dto.CenterList" project="00_miniProject_01_vaccineSupporter" 
+    file="/00_miniProject_01_vaccineSupporter/src/com/work/model/dto/CenterList.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="715" y="257"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="com.work.exception.RecordNotFoundException" 
+    project="00_miniProject_01_vaccineSupporter" 
+    file="/00_miniProject_01_vaccineSupporter/src/com/work/exception/RecordNotFoundException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1319" y="283"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="com.work.exception.DuplicateException" 
+    project="00_miniProject_01_vaccineSupporter" 
+    file="/00_miniProject_01_vaccineSupporter/src/com/work/exception/DuplicateException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1298" y="177"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="com.work.exception.CommonException" project="00_miniProject_01_vaccineSupporter" 
+    file="/00_miniProject_01_vaccineSupporter/src/com/work/exception/CommonException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1295" y="68"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="13">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="14" name="service">        
+        <position height="0" width="0" x="-46" y="3"/>      
+      </attribute>      
+      <multiplicity id="15" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-46" y="3"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="16">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="17" name="list">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="18" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="19">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="20" name="list">        
+        <position height="0" width="0" x="-18" y="9"/>      
+      </attribute>      
+      <multiplicity id="21" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="-18" y="9"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="22">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="23" name="notifyService">        
+        <position height="0" width="0" x="-70" y="5"/>      
+      </attribute>      
+      <multiplicity id="24" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-70" y="5"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="25">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="26" name="vacciService">        
+        <position height="0" width="0" x="14" y="0"/>      
+      </attribute>      
+      <multiplicity id="27" minimum="0" maximum="1">        
+        <position height="0" width="0" x="14" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="28">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="29" name="list">        
+        <position height="0" width="0" x="-15" y="7"/>      
+      </attribute>      
+      <multiplicity id="30" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="-15" y="7"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="31">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="32" name="utility">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="33" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
